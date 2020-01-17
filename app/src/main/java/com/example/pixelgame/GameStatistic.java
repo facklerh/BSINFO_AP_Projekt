@@ -1,21 +1,30 @@
 package com.example.pixelgame;
 
+import android.bluetooth.BluetoothDevice;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
 public class GameStatistic {
     @Attribute
+    public final String deviceID;
+    @Element
     public final String enemy;
     @Element
     private int played;
     @Element
     private int won;
 
-    public GameStatistic(String enemy){
-        this(enemy,0,0);
+    public GameStatistic(BluetoothDevice device){
+        this(device.getAddress(),device.getName());
     }
 
-    public GameStatistic(String enemy, int playedGames, int wonGames) {
+    public GameStatistic(String deviceID, String enemy){
+        this(deviceID,enemy,0,0);
+    }
+
+    public GameStatistic(String deviceID, String enemy, int playedGames, int wonGames) {
+        this.deviceID = deviceID;
         this.enemy = enemy;
         this.played = playedGames;
         this.won = wonGames;
