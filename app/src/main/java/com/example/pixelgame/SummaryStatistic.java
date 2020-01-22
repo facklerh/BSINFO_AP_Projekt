@@ -13,48 +13,48 @@ public class SummaryStatistic {
     final GameStatistic longestWinningStreak;
     final GameStatistic longestLosingStreak;
 
-    public SummaryStatistic(List<GameStatistic> statistics){
+    public SummaryStatistic(List<GameStatistic> statistics) {
 
         //modifiable variables to calculate values
-        int playedGames=0;
-        int wonGames=0;
+        int playedGames = 0;
+        int wonGames = 0;
 
-        GameStatistic minStatistic = new GameStatistic("","Nobody");
+        GameStatistic minStatistic = new GameStatistic("", "Nobody");
 
-        GameStatistic maxLosses=minStatistic;
-        GameStatistic maxVictories=minStatistic;
-        GameStatistic longestWinningStreak=minStatistic;
-        GameStatistic longestLosingStreak=minStatistic;
+        GameStatistic maxLosses = minStatistic;
+        GameStatistic maxVictories = minStatistic;
+        GameStatistic longestWinningStreak = minStatistic;
+        GameStatistic longestLosingStreak = minStatistic;
 
         //calculate variables
         for (GameStatistic statistic : statistics) {
 
-            playedGames+=statistic.allGames();
-            wonGames+=statistic.wonGames();
+            playedGames += statistic.allGames();
+            wonGames += statistic.wonGames();
 
-            if(maxLosses.lostGames()<statistic.lostGames()){
-                maxLosses=statistic;
+            if (maxLosses.lostGames() < statistic.lostGames()) {
+                maxLosses = statistic;
             }
-            if(maxVictories.wonGames()<statistic.wonGames()){
-                maxVictories=statistic;
+            if (maxVictories.wonGames() < statistic.wonGames()) {
+                maxVictories = statistic;
             }
-            if(longestWinningStreak.getTopWinningStreak()<statistic.getTopWinningStreak()){
-                longestWinningStreak=statistic;
+            if (longestWinningStreak.getTopWinningStreak() < statistic.getTopWinningStreak()) {
+                longestWinningStreak = statistic;
             }
-            if(longestLosingStreak.getTopLosingStreak()<statistic.getTopLosingStreak()){
-                longestLosingStreak=statistic;
+            if (longestLosingStreak.getTopLosingStreak() < statistic.getTopLosingStreak()) {
+                longestLosingStreak = statistic;
             }
         }
 
         //assign variables
-        this.playedGames=playedGames;
-        this.wonGames=wonGames;
-        this.lostGames=playedGames-wonGames;
-        this.winRatio=((float)wonGames)/playedGames;
-        this.loseRatio=1f-winRatio;
-        this.maxLosses=maxLosses;
-        this.maxVictories=maxVictories;
-        this.longestWinningStreak=longestWinningStreak;
-        this.longestLosingStreak=longestLosingStreak;
+        this.playedGames = playedGames;
+        this.wonGames = wonGames;
+        this.lostGames = playedGames - wonGames;
+        this.winRatio = ((float) wonGames) / playedGames;
+        this.loseRatio = 1f - winRatio;
+        this.maxLosses = maxLosses;
+        this.maxVictories = maxVictories;
+        this.longestWinningStreak = longestWinningStreak;
+        this.longestLosingStreak = longestLosingStreak;
     }
 }

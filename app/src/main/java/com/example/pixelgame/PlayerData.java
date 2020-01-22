@@ -14,39 +14,39 @@ public class PlayerData {
     @ElementList
     private List<GameStatistic> statistics;
 
-    public PlayerData(String name){
-        this(name,new ArrayList<GameStatistic>());
+    public PlayerData(String name) {
+        this(name, new ArrayList<GameStatistic>());
     }
 
-    public PlayerData(String playerName, ArrayList<GameStatistic> statistics){
-        this.playerName=playerName;
-        this.statistics=statistics;
+    public PlayerData(String playerName, ArrayList<GameStatistic> statistics) {
+        this.playerName = playerName;
+        this.statistics = statistics;
     }
 
-    public SummaryStatistic summary(){
+    public SummaryStatistic summary() {
         return new SummaryStatistic(statistics);
     }
 
-    public void addStatistic(String deviceID,String name){
-        if(!containsStatisticTo(deviceID)){
-            statistics.add(new GameStatistic(deviceID,name));
+    public void addStatistic(String deviceID, String name) {
+        if (!containsStatisticTo(deviceID)) {
+            statistics.add(new GameStatistic(deviceID, name));
         }
     }
 
-    public boolean containsStatisticTo(String deviceID){
+    public boolean containsStatisticTo(String deviceID) {
         for (GameStatistic statistic : statistics) {
-            if(statistic.deviceID.equals(deviceID)){
+            if (statistic.deviceID.equals(deviceID)) {
                 return true;
             }
         }
         return false;
     }
 
-    public GameStatistic get(String deviceID){
-        GameStatistic result=null;
+    public GameStatistic get(String deviceID) {
+        GameStatistic result = null;
         for (GameStatistic gameStatistic : statistics) {
             if (gameStatistic.deviceID.equals(deviceID)) {
-                result=gameStatistic;
+                result = gameStatistic;
                 break;
             }
         }

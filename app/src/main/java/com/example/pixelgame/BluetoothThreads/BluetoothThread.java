@@ -11,7 +11,7 @@ public abstract class BluetoothThread<Socket extends Closeable> extends Thread {
         this.socket = socket;
     }
 
-    public void cancel(){
+    public void cancel() {
         try {
             socket.close();
         } catch (IOException e) {

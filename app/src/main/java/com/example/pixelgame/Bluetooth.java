@@ -10,29 +10,30 @@ import com.example.pixelgame.BluetoothThreads.GameServiceThread;
 
 import java.io.IOException;
 
-import static com.example.pixelgame.AppData.*;
+import static com.example.pixelgame.AppData.APP_NAME;
+import static com.example.pixelgame.AppData.APP_UUID;
 
 public class Bluetooth {
-    private static final BluetoothAdapter adapter =BluetoothAdapter.getDefaultAdapter();
+    private static final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
     private static AcceptThread acceptThread;
     private static ConnectThread connectThread;
     private static GameServiceThread gameServiceThread;
 
-    static boolean isNotSupported(){
+    static boolean isNotSupported() {
         return adapter == null;
     }
 
-    public static void enable(){
-        if(!adapter.isEnabled()){
+    public static void enable() {
+        if (!adapter.isEnabled()) {
             adapter.enable();
         }
     }
 
-    public static AcceptThread awaitConnection(){
+    public static AcceptThread awaitConnection() {
         interruptListening();
         try {
-            acceptThread=new AcceptThread(adapter.listenUsingInsecureRfcommWithServiceRecord(APP_NAME, APP_UUID));
+            acceptThread = new AcceptThread(adapter.listenUsingInsecureRfcommWithServiceRecord(APP_NAME, APP_UUID));
             acceptThread.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,19 +41,19 @@ public class Bluetooth {
         return acceptThread;
     }
 
-    public static void interruptListening(){
+    public static void interruptListening() {
         if (acceptThread != null) {
             acceptThread.cancel();
             acceptThread.interrupt();
-            acceptThread=null;
+            acceptThread = null;
         }
     }
 
-    public static ConnectThread tryConnection(BluetoothDevice device){
+    public static ConnectThread tryConnection(BluetoothDevice device) {
         interruptConnectionTry();
-        BluetoothSocket conSocket=null;
+        BluetoothSocket conSocket = null;
         try {
-            conSocket=device.createRfcommSocketToServiceRecord(APP_UUID);
+            conSocket = device.createRfcommSocketToServiceRecord(APP_UUID);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,23 +62,23 @@ public class Bluetooth {
         return connectThread;
     }
 
-    public static void interruptConnectionTry(){
+    public static void interruptConnectionTry() {
         if (connectThread != null) {
             connectThread.cancel();
             connectThread.interrupt();
-            connectThread=null;
+            connectThread = null;
         }
     }
 
-    public static void cancelConnection(){
+    public static void cancelConnection() {
         if (gameServiceThread != null) {
             gameServiceThread.cancel();
             gameServiceThread.interrupt();
-            gameServiceThread=null;
+            gameServiceThread = null;
         }
     }
 
-    public static void interruptAll(){
+    public static void interruptAll() {
         interruptListening();
         interruptConnectionTry();
         cancelConnection();

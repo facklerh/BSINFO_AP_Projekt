@@ -15,7 +15,7 @@ public class MainActivity extends BaseView {
         setContentView(R.layout.activity_main);
 
         if (Bluetooth.isNotSupported()) {
-            showExitDialog(R.string.error_BT,R.string.errM_noBTSupport);
+            showExitDialog(R.string.error_BT, R.string.errM_noBTSupport);
         } else {
             loadData();
             initButtons();
@@ -30,11 +30,11 @@ public class MainActivity extends BaseView {
         }
     }
 
-    private void initData(){
+    private void initData() {
         final EditText input = new EditText(this);
-        final Context toastContext= this;
+        final Context toastContext = this;
 
-        final AlertDialog dialog=new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle(R.string.req_name)
                 .setView(input)
@@ -45,20 +45,20 @@ public class MainActivity extends BaseView {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        String playerName=input.getText().toString();
-                        if (playerName.isEmpty()) {
-                            Toast.makeText(toastContext,R.string.errM_nameEmpty,Toast.LENGTH_SHORT).show();
-                        } else {
-                            AppData.init(playerName);
-                            dialog.dismiss();
-                        }
+                String playerName = input.getText().toString();
+                if (playerName.isEmpty()) {
+                    Toast.makeText(toastContext, R.string.errM_nameEmpty, Toast.LENGTH_SHORT).show();
+                } else {
+                    AppData.init(playerName);
+                    dialog.dismiss();
+                }
             }
         });
     }
 
-    private void initButtons(){
-        initNavigationButton(R.id.btn_play,WaitingArea.class);
-        initNavigationButton(R.id.btn_settings,Settings.class);
-        initNavigationButton(R.id.btn_statistic,Statistic.class);
+    private void initButtons() {
+        initNavigationButton(R.id.btn_play, WaitingArea.class);
+        initNavigationButton(R.id.btn_settings, Settings.class);
+        initNavigationButton(R.id.btn_statistic, Statistic.class);
     }
 }

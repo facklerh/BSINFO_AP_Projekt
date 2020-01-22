@@ -36,12 +36,12 @@ public class GameStatistic {
     @Element
     private boolean curStreakIsWinningStreak;
 
-    public GameStatistic(BluetoothDevice device){
-        this(device.getAddress(),device.getName());
+    public GameStatistic(BluetoothDevice device) {
+        this(device.getAddress(), device.getName());
     }
 
-    public GameStatistic(String deviceID, String name){
-        this(deviceID, name,0,0,0,0,0,false);
+    public GameStatistic(String deviceID, String name) {
+        this(deviceID, name, 0, 0, 0, 0, 0, false);
     }
 
     public GameStatistic(String deviceID, String name, int played, int won, int topWinningStreak, int topLosingStreak, int curStreak, boolean curStreakIsWinningStreak) {
@@ -55,49 +55,49 @@ public class GameStatistic {
         this.curStreakIsWinningStreak = curStreakIsWinningStreak;
     }
 
-    public int wonGames(){
+    public int wonGames() {
         return won;
     }
 
-    public int lostGames(){
-        return played-won;
+    public int lostGames() {
+        return played - won;
     }
 
-    public int allGames(){
+    public int allGames() {
         return played;
     }
 
-    public void addResult(boolean won){
+    public void addResult(boolean won) {
         played++;
         checkStreaks(won);
-        if (won){
+        if (won) {
             this.won++;
         }
     }
 
-    private void checkStreaks(boolean won){
-        if(won!=curStreakIsWinningStreak){
-            if(curStreakIsWinningStreak){
-                if(curStreak>topWinningStreak){
-                    topWinningStreak=curStreak;
+    private void checkStreaks(boolean won) {
+        if (won != curStreakIsWinningStreak) {
+            if (curStreakIsWinningStreak) {
+                if (curStreak > topWinningStreak) {
+                    topWinningStreak = curStreak;
                 }
             } else {
-                if(curStreak>topLosingStreak){
-                    topLosingStreak=curStreak;
+                if (curStreak > topLosingStreak) {
+                    topLosingStreak = curStreak;
                 }
             }
-            curStreak=1;
-            curStreakIsWinningStreak=!curStreakIsWinningStreak;
+            curStreak = 1;
+            curStreakIsWinningStreak = !curStreakIsWinningStreak;
         } else {
             curStreak++;
         }
     }
 
-    public float winRatio(){
-        return ((float)won)/played;
+    public float winRatio() {
+        return ((float) won) / played;
     }
 
-    public float loseRatio(){
-        return ((float) lostGames())/played;
+    public float loseRatio() {
+        return ((float) lostGames()) / played;
     }
 }

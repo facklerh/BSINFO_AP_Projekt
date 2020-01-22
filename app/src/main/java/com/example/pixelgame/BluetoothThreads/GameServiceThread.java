@@ -15,16 +15,16 @@ public class GameServiceThread extends BluetoothThread<BluetoothSocket> {
     public GameServiceThread(BluetoothSocket socket) {
         super(socket);
         // this.connectedDevice = this.socket.getRemoteDevice();
-        InputStream getInput=null;
-        OutputStream getOutput=null;
+        InputStream getInput = null;
+        OutputStream getOutput = null;
         try {
             getInput = socket.getInputStream();
             getOutput = socket.getOutputStream();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        input=getInput;
-        output=getOutput;
+        input = getInput;
+        output = getOutput;
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 
-
 import java.io.IOException;
 
 public class AcceptThread extends BluetoothThread<BluetoothServerSocket> {
@@ -16,15 +15,15 @@ public class AcceptThread extends BluetoothThread<BluetoothServerSocket> {
 
     @Override
     public void run() {
-        BluetoothSocket connectedSocket=null;
-        BluetoothDevice device=null;
+        BluetoothSocket connectedSocket = null;
+        BluetoothDevice device = null;
         try {
-            connectedSocket=this.socket.accept();
+            connectedSocket = this.socket.accept();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if (connectedSocket!=null){
+        if (connectedSocket != null) {
             new GameServiceThread(connectedSocket).start();
         }
     }
