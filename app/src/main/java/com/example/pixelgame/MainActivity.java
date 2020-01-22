@@ -14,7 +14,7 @@ public class MainActivity extends BaseView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!Bluetooth.isNotSupported()) {
+        if (Bluetooth.isNotSupported()) {
             showExitDialog(R.string.error_BT,R.string.errM_noBTSupport);
         } else {
             loadData();
