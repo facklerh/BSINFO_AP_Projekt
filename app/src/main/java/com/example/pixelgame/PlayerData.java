@@ -10,22 +10,21 @@ import java.util.List;
 @Root
 public class PlayerData {
     @Attribute
-    String name;
+    String playerName;
     @ElementList
-    private List<GameStatistic> statistics = new ArrayList<>();
+    private List<GameStatistic> statistics;
 
-    public PlayerData(String name) {
-        this.name = name;
+    public PlayerData(String name){
+        this(name,new ArrayList<GameStatistic>());
     }
 
-    public GameStatistic statisticSummary(){
-        int played=0;
-        int won=0;
-        for (GameStatistic gameStatistic : statistics) {
-            played+=gameStatistic.allGames();
-            won+=gameStatistic.wonGames();
-        }
-        return new GameStatistic("","Summary",played,won);
+    public PlayerData(String playerName, ArrayList<GameStatistic> statistics){
+        this.playerName=playerName;
+        this.statistics=statistics;
+    }
+
+    public SummaryStatistic summary(){
+        return new SummaryStatistic(statistics);
     }
 
     public void addStatistic(String deviceID,String name){
