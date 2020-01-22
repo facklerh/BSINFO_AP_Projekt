@@ -9,6 +9,6 @@
     <string name="error">Error</string>
     <string name="error_BT">Bluetooth error</string>
     <string name="errM_default">An error occurred!</string>
-    <string name="errM_noBTSupport">"It seems like device does not support bluetooth :'-(\n Please try again with a newer device."</string>
+    <string name="errM_noBTSupport">"It seems like device does not support bluetooth :'-(\nPlease try again with a newer device."</string>
     <string name="errM_nameEmpty">"Name field empty. Please enter name!"</string>
 </resources>
