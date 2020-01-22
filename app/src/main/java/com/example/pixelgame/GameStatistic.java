@@ -9,25 +9,50 @@ public class GameStatistic {
     @Attribute
     public final String deviceID;
     @Element
-    public final String enemy;
+    public String name;
     @Element
     private int played;
     @Element
     private int won;
+    @Element
+    private int topWinningStreak;
+    @Element
+    private int topLosingStreak;
+    @Element
+    private int curStreak;
+
+    public int getTopWinningStreak() {
+        return topWinningStreak;
+    }
+
+    public int getTopLosingStreak() {
+        return topLosingStreak;
+    }
+
+    public int getCurStreak() {
+        return curStreak;
+    }
+
+    @Element
+    private boolean curStreakIsWinningStreak;
 
     public GameStatistic(BluetoothDevice device){
         this(device.getAddress(),device.getName());
     }
 
-    public GameStatistic(String deviceID, String enemy){
-        this(deviceID,enemy,0,0);
+    public GameStatistic(String deviceID, String name){
+        this(deviceID, name,0,0,0,0,0,false);
     }
 
-    public GameStatistic(String deviceID, String enemy, int playedGames, int wonGames) {
+    public GameStatistic(String deviceID, String name, int played, int won, int topWinningStreak, int topLosingStreak, int curStreak, boolean curStreakIsWinningStreak) {
         this.deviceID = deviceID;
-        this.enemy = enemy;
-        this.played = playedGames;
-        this.won = wonGames;
+        this.name = name;
+        this.played = played;
+        this.won = won;
+        this.topWinningStreak = topWinningStreak;
+        this.topLosingStreak = topLosingStreak;
+        this.curStreak = curStreak;
+        this.curStreakIsWinningStreak = curStreakIsWinningStreak;
     }
 
     public int wonGames(){
@@ -44,8 +69,27 @@ public class GameStatistic {
 
     public void addResult(boolean won){
         played++;
+        checkStreaks(won);
         if (won){
             this.won++;
+        }
+    }
+
+    private void checkStreaks(boolean won){
+        if(won!=curStreakIsWinningStreak){
+            if(curStreakIsWinningStreak){
+                if(curStreak>topWinningStreak){
+                    topWinningStreak=curStreak;
+                }
+            } else {
+                if(curStreak>topLosingStreak){
+                    topLosingStreak=curStreak;
+                }
+            }
+            curStreak=1;
+            curStreakIsWinningStreak=!curStreakIsWinningStreak;
+        } else {
+            curStreak++;
         }
     }
 
