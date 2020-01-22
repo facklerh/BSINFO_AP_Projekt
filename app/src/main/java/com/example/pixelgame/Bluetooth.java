@@ -30,12 +30,10 @@ public class Bluetooth {
     }
 
     public static AcceptThread awaitConnection(){
-        if(acceptThread!=null){
-            acceptThread.cancel();
-            acceptThread=null;
-        }
+        interruptListening();
         try {
             acceptThread=new AcceptThread(adapter.listenUsingInsecureRfcommWithServiceRecord(APP_NAME, APP_UUID));
+            acceptThread.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,6 +49,7 @@ public class Bluetooth {
     }
 
     public static ConnectThread tryConnection(BluetoothDevice device){
+        interruptConnectionTry();
         BluetoothSocket conSocket=null;
         try {
             conSocket=device.createRfcommSocketToServiceRecord(APP_UUID);
