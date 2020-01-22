@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ConnectThread extends BluetoothThread<BluetoothSocket> {
 
-    protected ConnectThread(BluetoothSocket socket){
+    public ConnectThread(BluetoothSocket socket){
         super(socket);
     }
 
@@ -19,6 +19,6 @@ public class ConnectThread extends BluetoothThread<BluetoothSocket> {
             cancel();
             e.printStackTrace();
         }
-        new GameServiceThread(socket);
+        new GameServiceThread(socket).start();
     }
 }

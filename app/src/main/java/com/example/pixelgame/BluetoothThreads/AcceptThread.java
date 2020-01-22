@@ -10,7 +10,7 @@ import java.io.IOException;
 public class AcceptThread extends BluetoothThread<BluetoothServerSocket> {
 
 
-    protected AcceptThread(BluetoothServerSocket bluetoothServerSocket) {
+    public AcceptThread(BluetoothServerSocket bluetoothServerSocket) {
         super(bluetoothServerSocket);
     }
 
