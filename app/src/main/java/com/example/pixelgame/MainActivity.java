@@ -57,7 +57,7 @@ public class MainActivity extends BaseView {
     }
 
     private void initButtons() {
-        initNavigationButton(R.id.btn_play, WaitingArea.class);
+        initNavigationButton(R.id.btn_play, GyroscopeUnit.class);
         initNavigationButton(R.id.btn_settings, Settings.class);
         initNavigationButton(R.id.btn_statistic, Statistic.class);
     }
