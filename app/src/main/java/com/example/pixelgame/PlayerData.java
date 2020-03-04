@@ -13,12 +13,32 @@ public class PlayerData {
     @ElementMap
     private HashMap<String, GameStatistic> statisticMap;
 
+    public PlayerData() {
+        this("");
+    }
+
     public PlayerData(String name) {
         this(name, new HashMap());
     }
 
     public PlayerData(String playerName, HashMap statisticMap) {
         this.playerName = playerName;
+        this.statisticMap = statisticMap;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public HashMap<String, GameStatistic> getStatisticMap() {
+        return statisticMap;
+    }
+
+    public void setStatisticMap(HashMap<String, GameStatistic> statisticMap) {
         this.statisticMap = statisticMap;
     }
 

@@ -19,19 +19,21 @@ import static com.example.pixelgame.Bluetooth.isMobileDevice;
 public class MobileDeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     private static final int RSC_VIEW_ID = R.layout.item_mobile_device;
-    private final PlayerData statistics = AppData.getPlayerData();
+    private PlayerData statistics;
 
     HashSet<BluetoothDevice> devices = new HashSet<>();
 
     public MobileDeviceListAdapter(@NonNull Context context) {
         super(context, RSC_VIEW_ID);
+        statistics = AppData.getPlayerData();
     }
 
     @Override
     public void add(@Nullable BluetoothDevice object) {
-        if (isMobileDevice(object) && isNotContained(object))
+        if (isMobileDevice(object) && isNotContained(object)) {
             devices.add(object);
-        super.add(object);
+            super.add(object);
+        }
     }
 
     private boolean isNotContained(BluetoothDevice object) {
@@ -62,14 +64,8 @@ public class MobileDeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
 
         if (device != null) {
             TextView tvName = convertView.findViewById(R.id.tvName);
-            String name;
             GameStatistic statistic = statistics.get(device.getAddress());
-            if (statistic == null) {
-                name = device.getName().isEmpty() ? device.getAddress() : device.getName();
-            } else {
-                name = statistic.name;
-            }
-            tvName.setText(name);
+            tvName.setText(statistic == null ? device.getName() : statistic.name);
         }
 
         return convertView;

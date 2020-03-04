@@ -40,6 +40,7 @@
         <activity
             android:name=".Settings"
             android:screenOrientation="landscape">
+
         </activity>
     </application>
 
