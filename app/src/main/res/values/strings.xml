@@ -18,4 +18,6 @@
     <string name="errM_illegalDevice">Another device tried to connect!\n\n%1$s\n%2$s</string>
     <string name="errM_notFoundInTime">Device not found in time.\\nPlease try again.</string>
     <string name="errM_missingSocket">Did not receive bluetooth socket.</string>
+    <string name="reset">Reset</string>
+    <string name="discover">Discover</string>
 </resources>

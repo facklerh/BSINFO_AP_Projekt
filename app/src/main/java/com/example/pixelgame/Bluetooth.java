@@ -14,6 +14,7 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Set;
 
 import static android.bluetooth.BluetoothClass.Device.Major.PHONE;
 import static com.example.pixelgame.AppData.APP_NAME;
@@ -40,6 +41,10 @@ public class Bluetooth {
 
     public static void cancelDiscovery() {
         adapter.cancelDiscovery();
+    }
+
+    public static Set<BluetoothDevice> getBonded() {
+        return adapter.getBondedDevices();
     }
 
     public static synchronized BluetoothServerSocket getServerSocket() throws IOException {
@@ -122,6 +127,6 @@ public class Bluetooth {
     // util
 
     public static boolean isMobileDevice(BluetoothDevice device) {
-        return device.getBluetoothClass().getMajorDeviceClass() == PHONE;
+        return device.getBluetoothClass().getMajorDeviceClass() == PHONE && device.getName() != null && !device.getName().isEmpty();
     }
 }

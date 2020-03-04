@@ -33,6 +33,9 @@
         <activity
             android:name=".Settings"
             android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".WaitingArea"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
