@@ -29,7 +29,7 @@ public class GameThread extends Thread {
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
-                    this.gamePanel.update();
+                    this.gamePanel.update(canvas);
                     this.gamePanel.draw(canvas); // only needed to draw once?
                 }
             } catch (Exception e) {

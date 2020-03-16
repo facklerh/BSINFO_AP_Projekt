@@ -19,6 +19,7 @@ public class MainActivity extends BaseView {
         } else {
             loadData();
             initButtons();
+            launchActivity(GyroscopeUnit.class);
         }
     }
 

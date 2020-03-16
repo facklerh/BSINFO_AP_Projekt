@@ -1,20 +1,20 @@
 package com.example.pixelgame;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.view.View;
 
-public class DrawFigure implements GameObject{
+public class PlayerRectangle extends PlayerObject {
 
-    private Rect rectangle;
-    private int color;
+    public PlayerRectangle(int color, Rect rect) {
+        super(color,60,6);
+        rectangle = rect;
+    }
 
-    public DrawFigure(Rect rectangle, int color) {
-        this.rectangle = rectangle;
-        this.color = color;
+    public void shoot(){
+        // new Rectangle...
+        //direction, position, power
 
     }
 
@@ -34,4 +34,3 @@ public class DrawFigure implements GameObject{
         rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2, point.y + rectangle.height()/2);
     }
 }
-
