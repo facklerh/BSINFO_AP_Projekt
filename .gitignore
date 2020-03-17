@@ -1,15 +1,15 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/save*
-/.idea/dict*
-.DS_Store
-/build
-/captures
+# Android Studio
+/*/local.properties
+/*/out
+/*/*/build
+/*/*/production
+captures/
+.navigation/
+*.ipr
+*~
+*.swp
+
+# External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
 # Built application files
@@ -22,12 +22,20 @@ com_crashlytics_export_strings.xml
 local.properties
 
 # Gradle generated files
+.gradle
 .gradle/
+/build
 
 # Signing files
 .signing/
 
 # User-specific configurations
+/.idea/caches
+/.idea/libraries
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/save*
+/.idea/dict*
 .idea/libraries/
 .idea/workspace.xml
 .idea/tasks.xml
