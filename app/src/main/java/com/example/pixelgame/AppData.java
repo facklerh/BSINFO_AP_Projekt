@@ -11,7 +11,7 @@ import java.util.UUID;
 public class AppData {
 
     public final static String APP_NAME = "PixelGame";
-    public final static UUID APP_UUID = UUID.fromString("b8841a90-d134-11e8-b568-0800200c9a55");
+    public final static UUID APP_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static final String TAG = "APPDATA";
 
     private static File dataDirectory;
