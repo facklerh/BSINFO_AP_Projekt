@@ -20,4 +20,11 @@
     <string name="errM_missingSocket">Did not receive bluetooth socket.</string>
     <string name="reset">Reset</string>
     <string name="discover">Discover</string>
+    <string name="summary">%1$s´s Summary</string>
+    <string name="playedGames">Played Games: %1$d</string>
+    <string name="wonGames">Won Games: %1$d</string>
+    <string name="winStreak">Best win streak: %1$d</string>
+    <string name="loseStreak">Worst lose streak: %1$d</string>
+    <string name="curStreak">Current streak: %1$d%2$s</string>
+    <string name="winRatio">Winning rate: %1$.2f</string>
 </resources>
