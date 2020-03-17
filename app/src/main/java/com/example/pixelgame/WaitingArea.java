@@ -27,4 +27,12 @@ public class WaitingArea extends BaseView {
             finish();
         }
     }
+
+    private void initWaitingScreen() {
+
+    }
+
+    private void clearScreen() {
+
+    }
 }
