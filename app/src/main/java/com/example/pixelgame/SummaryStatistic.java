@@ -1,6 +1,6 @@
 package com.example.pixelgame;
 
-import java.util.List;
+import java.util.Collection;
 
 public class SummaryStatistic {
     final int playedGames;
@@ -13,7 +13,7 @@ public class SummaryStatistic {
     final GameStatistic longestWinningStreak;
     final GameStatistic longestLosingStreak;
 
-    public SummaryStatistic(List<GameStatistic> statistics) {
+    public SummaryStatistic(Collection<GameStatistic> statistics) {
 
         //modifiable variables to calculate values
         int playedGames = 0;

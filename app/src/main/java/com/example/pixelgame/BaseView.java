@@ -8,15 +8,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public abstract class BaseView extends AppCompatActivity {
 
-    private float swipeStartPoint = 0f;
-    private float swipeEndPoint = 0f;
+    private float swipeStartY = 0f;
+    private float swipeEndY = 0f;
 
     // Lifecycle activities
 
@@ -41,7 +41,16 @@ public abstract class BaseView extends AppCompatActivity {
     private void hideDecorView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            int bitMask =
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                bitMask |= View.SYSTEM_UI_FLAG_IMMERSIVE;
+            }
+            decorView.setSystemUiVisibility(bitMask);
         }
     }
 
@@ -53,10 +62,9 @@ public abstract class BaseView extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Bluetooth.interruptAll();
+    protected void onStop() {
         AppData.save();
+        super.onStop();
     }
 
     // Listener
@@ -65,23 +73,19 @@ public abstract class BaseView extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                swipeStartPoint = event.getY();
-                Log.wtf("INFO", "ACTION_DOWN " + swipeStartPoint);
+                swipeStartY = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
-                swipeEndPoint = event.getY();
-                Log.wtf("INFO", "ACTION_UP " + swipeEndPoint);
+                swipeEndY = event.getY();
                 if (upSwipe()) {
-                    Log.wtf("INFO", "upswipe was recognized");
                     setUI_fullscreen();
                 }
-
         }
         return true;
     }
 
     private boolean upSwipe() {
-        return swipeEndPoint < swipeStartPoint;
+        return swipeEndY < swipeStartY;
     }
 
 
@@ -89,6 +93,10 @@ public abstract class BaseView extends AppCompatActivity {
 
     public void launchActivity(Class cls) {
         Intent intent = new Intent(this, cls);
+        launchActivity(intent);
+    }
+
+    public void launchActivity(Intent intent) {
         startActivity(intent);
     }
 
@@ -107,6 +115,22 @@ public abstract class BaseView extends AppCompatActivity {
             button.setOnClickListener(onClick);
         }
         return button;
+    }
+
+    void showMessage(int msgID) {
+        showMessage(msgID, Toast.LENGTH_SHORT);
+    }
+
+    void showMessage(String msg) {
+        showMessage(msg, Toast.LENGTH_SHORT);
+    }
+
+    void showMessage(int msgID, int showTime) {
+        Toast.makeText(this, msgID, showTime).show();
+    }
+
+    void showMessage(String msg, int showTime) {
+        Toast.makeText(this, msg, showTime).show();
     }
 
     void showErrorDialog() {

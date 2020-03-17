@@ -1,5 +1,7 @@
 package com.example.pixelgame;
 
+import android.util.Log;
+
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -9,7 +11,8 @@ import java.util.UUID;
 public class AppData {
 
     public final static String APP_NAME = "PixelGame";
-    public final static UUID APP_UUID = UUID.fromString("b8841a90-d134-11e8-b568-0800200c9a55");
+    public final static UUID APP_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final String TAG = "APPDATA";
 
     private static File dataDirectory;
 
@@ -31,6 +34,7 @@ public class AppData {
             serializer.write(playerData, dataDirectory);
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d(TAG, "save failed");
         }
     }
 
@@ -39,9 +43,12 @@ public class AppData {
         if (loadPossible) {
             Serializer serializer = new Persister();
             try {
+                playerData = new PlayerData();
                 serializer.read(playerData, dataDirectory);
             } catch (Exception e) {
+                Log.d(TAG, "Could not read Data");
                 e.printStackTrace();
+                loadPossible = false;
             }
         }
         return loadPossible;

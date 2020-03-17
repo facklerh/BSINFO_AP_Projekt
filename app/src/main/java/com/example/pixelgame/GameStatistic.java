@@ -7,7 +7,7 @@ import org.simpleframework.xml.Element;
 
 public class GameStatistic {
     @Attribute
-    public final String deviceID;
+    public String deviceID;
     @Element
     public String name;
     @Element
@@ -18,6 +18,8 @@ public class GameStatistic {
     private int topWinningStreak;
     @Element
     private int topLosingStreak;
+    @Element
+    private boolean curStreakIsWinningStreak;
     @Element
     private int curStreak;
 
@@ -32,9 +34,6 @@ public class GameStatistic {
     public int getCurStreak() {
         return curStreak;
     }
-
-    @Element
-    private boolean curStreakIsWinningStreak;
 
     public GameStatistic(BluetoothDevice device) {
         this(device.getAddress(), device.getName());
@@ -99,5 +98,53 @@ public class GameStatistic {
 
     public float loseRatio() {
         return ((float) lostGames()) / played;
+    }
+
+    public String getDeviceID() {
+        return deviceID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPlayed() {
+        return played;
+    }
+
+    public void setPlayed(int played) {
+        this.played = played;
+    }
+
+    public int getWon() {
+        return won;
+    }
+
+    public void setWon(int won) {
+        this.won = won;
+    }
+
+    public void setTopWinningStreak(int topWinningStreak) {
+        this.topWinningStreak = topWinningStreak;
+    }
+
+    public void setTopLosingStreak(int topLosingStreak) {
+        this.topLosingStreak = topLosingStreak;
+    }
+
+    public void setCurStreak(int curStreak) {
+        this.curStreak = curStreak;
+    }
+
+    public boolean isCurStreakIsWinningStreak() {
+        return curStreakIsWinningStreak;
+    }
+
+    public void setCurStreakIsWinningStreak(boolean curStreakIsWinningStreak) {
+        this.curStreakIsWinningStreak = curStreakIsWinningStreak;
     }
 }

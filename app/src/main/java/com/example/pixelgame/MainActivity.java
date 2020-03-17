@@ -1,11 +1,11 @@
 package com.example.pixelgame;
 
 import android.app.AlertDialog;
-import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends BaseView {
 
@@ -14,7 +14,9 @@ public class MainActivity extends BaseView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Bluetooth.isNotSupported()) {
+        if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) == null) {
+            showExitDialog(R.string.error_Sensor, R.string.errM_noSensorSupport);
+        } else if (Bluetooth.isNotSupported()) {
             showExitDialog(R.string.error_BT, R.string.errM_noBTSupport);
         } else {
             loadData();
@@ -33,7 +35,6 @@ public class MainActivity extends BaseView {
 
     private void initData() {
         final EditText input = new EditText(this);
-        final Context toastContext = this;
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
@@ -48,7 +49,7 @@ public class MainActivity extends BaseView {
             public void onClick(View v) {
                 String playerName = input.getText().toString();
                 if (playerName.isEmpty()) {
-                    Toast.makeText(toastContext, R.string.errM_nameEmpty, Toast.LENGTH_SHORT).show();
+                    showMessage(R.string.errM_nameEmpty);
                 } else {
                     AppData.init(playerName);
                     dialog.dismiss();
@@ -58,7 +59,7 @@ public class MainActivity extends BaseView {
     }
 
     private void initButtons() {
-        initNavigationButton(R.id.btn_play, GyroscopeUnit.class);
+        initNavigationButton(R.id.btn_play, ConnectionActivity.class);
         initNavigationButton(R.id.btn_settings, Settings.class);
         initNavigationButton(R.id.btn_statistic, Statistic.class);
     }
