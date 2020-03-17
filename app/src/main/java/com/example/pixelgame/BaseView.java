@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 public abstract class BaseView extends AppCompatActivity {
 
-    private float swipeStartPoint = 0f;
-    private float swipeEndPoint = 0f;
+    private float swipeStartY = 0f;
+    private float swipeEndY = 0f;
 
     // Lifecycle activities
 
@@ -73,10 +73,10 @@ public abstract class BaseView extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                swipeStartPoint = event.getY();
+                swipeStartY = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
-                swipeEndPoint = event.getY();
+                swipeEndY = event.getY();
                 if (upSwipe()) {
                     setUI_fullscreen();
                 }
@@ -85,7 +85,7 @@ public abstract class BaseView extends AppCompatActivity {
     }
 
     private boolean upSwipe() {
-        return swipeEndPoint < swipeStartPoint;
+        return swipeEndY < swipeStartY;
     }
 
 
