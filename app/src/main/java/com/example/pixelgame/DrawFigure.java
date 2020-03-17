@@ -1,13 +1,11 @@
 package com.example.pixelgame;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.view.View;
 
-public class DrawFigure implements GameObject{
+public class DrawFigure implements GameObject {
 
     private Rect rectangle;
     private int color;
@@ -31,7 +29,7 @@ public class DrawFigure implements GameObject{
     }
 
     public void update(Point point) {
-        rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2, point.y + rectangle.height()/2);
+        rectangle.set(point.x - rectangle.width() / 2, point.y - rectangle.height() / 2, point.x + rectangle.width() / 2, point.y + rectangle.height() / 2);
     }
 }
 

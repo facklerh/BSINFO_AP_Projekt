@@ -19,6 +19,8 @@ public class GameStatistic {
     @Element
     private int topLosingStreak;
     @Element
+    private boolean curStreakIsWinningStreak;
+    @Element
     private int curStreak;
 
     public int getTopWinningStreak() {
@@ -32,9 +34,6 @@ public class GameStatistic {
     public int getCurStreak() {
         return curStreak;
     }
-
-    @Element
-    private boolean curStreakIsWinningStreak;
 
     public GameStatistic(BluetoothDevice device) {
         this(device.getAddress(), device.getName());

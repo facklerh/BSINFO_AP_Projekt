@@ -5,11 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
-import android.view.WindowManager;
 
 public class GyroscopeUnit extends BaseView implements SensorEventListener {
 
@@ -67,7 +64,6 @@ public class GyroscopeUnit extends BaseView implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
             if (sensorEvent.values.length > 4) {
                 float[] truncatedRotationVector = new float[4];
@@ -103,7 +99,7 @@ public class GyroscopeUnit extends BaseView implements SensorEventListener {
 //                }
 //                Log.wtf(TAG, "Values: " + sb.toString());
 //                Log.wtf(TAG, "-------------------------------------");
-                // gyroControl.print();
+    // gyroControl.print();
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
