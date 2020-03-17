@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -8,11 +8,11 @@ import android.graphics.Rect;
 public class PlayerRectangle extends PlayerObject {
 
     public PlayerRectangle(int color, Rect rect) {
-        super(color,60,6);
+        super(color, 60, 6);
         rectangle = rect;
     }
 
-    public void shoot(){
+    public void shoot() {
         // new Rectangle...
         //direction, position, power
 
@@ -31,6 +31,6 @@ public class PlayerRectangle extends PlayerObject {
     }*/
 
     public void update(Point point) {
-        rectangle.set(point.x - rectangle.width()/2, point.y - rectangle.height()/2, point.x + rectangle.width()/2, point.y + rectangle.height()/2);
+        rectangle.set(point.x - rectangle.width() / 2, point.y - rectangle.height() / 2, point.x + rectangle.width() / 2, point.y + rectangle.height() / 2);
     }
 }

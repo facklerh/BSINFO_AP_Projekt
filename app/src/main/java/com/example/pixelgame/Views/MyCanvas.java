@@ -1,11 +1,10 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.nfc.Tag;
 import android.util.Log;
 import android.view.View;
 
@@ -23,19 +22,11 @@ public class MyCanvas extends View {
     long time_last = 0;
     long time_now = 0;
 
-    public MyCanvas (Context context) {
-        super (context);
+    public MyCanvas(Context context) {
+        super(context);
         paint = new Paint();
         rect = new Rect();
     }
-
-
-
-
-
-
-
-
 
 
     public void getPitchAndRoll() {
@@ -69,8 +60,7 @@ public class MyCanvas extends View {
         if (count <= 100) {
             canvas.drawRect(canvas.getWidth() / 2 - rect_width + s_pitch, canvas.getHeight() / 2 + rect_height + s_roll, canvas.getWidth() / 2 + rect_width + s_pitch, canvas.getHeight() / 2 - rect_height + s_roll, paint);
             count = 0;
-        }
-        else {
+        } else {
             count++;
         }
         time_last = tInMs;
@@ -91,7 +81,7 @@ public class MyCanvas extends View {
 //      canvas.drawText();
     }
 
-    public long askTime () {
+    public long askTime() {
         Calendar calendar = Calendar.getInstance();
         Long timeInMs = calendar.getTimeInMillis();
         Log.wtf("---------", "Time in MS: " + timeInMs);

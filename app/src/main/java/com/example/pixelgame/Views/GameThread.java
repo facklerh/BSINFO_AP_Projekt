@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
@@ -24,7 +24,7 @@ public class GameThread extends Thread {
     @Override
     public void run() {
 
-        while(running) {
+        while (running) {
             canvas = null;
             try {
                 canvas = this.surfaceHolder.lockCanvas();
@@ -34,8 +34,7 @@ public class GameThread extends Thread {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            finally {
+            } finally {
                 if (canvas != null) {
                     try {
                         surfaceHolder.unlockCanvasAndPost(canvas);

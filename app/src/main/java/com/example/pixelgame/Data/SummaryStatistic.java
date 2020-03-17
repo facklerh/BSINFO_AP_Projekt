@@ -1,17 +1,17 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Data;
 
 import java.util.Collection;
 
 public class SummaryStatistic {
-    final int playedGames;
-    final int wonGames;
-    final int lostGames;
-    final float winRatio;
-    final float loseRatio;
-    final GameStatistic maxLosses;
-    final GameStatistic maxVictories;
-    final GameStatistic longestWinningStreak;
-    final GameStatistic longestLosingStreak;
+    public final int playedGames;
+    public final int wonGames;
+    public final int lostGames;
+    public final float winRatio;
+    public final float loseRatio;
+    public final GameStatistic maxLosses;
+    public final GameStatistic maxVictories;
+    public final GameStatistic longestWinningStreak;
+    public final GameStatistic longestLosingStreak;
 
     public SummaryStatistic(Collection<GameStatistic> statistics) {
 

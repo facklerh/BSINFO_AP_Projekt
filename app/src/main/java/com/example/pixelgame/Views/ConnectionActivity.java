@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.pixelgame.Bluetooth;
+import com.example.pixelgame.R;
+import com.example.pixelgame.Views.ListAdapter.MobileDeviceListAdapter;
 
 import java.io.Closeable;
 import java.io.IOException;

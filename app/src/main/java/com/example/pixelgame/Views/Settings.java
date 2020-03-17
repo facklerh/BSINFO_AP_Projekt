@@ -1,6 +1,8 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.os.Bundle;
+
+import com.example.pixelgame.R;
 
 public class Settings extends BaseView {
 

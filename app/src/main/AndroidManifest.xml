@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Views.MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,22 +22,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Game"
-            android:screenOrientation="landscape"></activity>
+            android:name=".Views.ConnectionActivity"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".ConnectionActivity"
-            android:screenOrientation="landscape"></activity>
+            android:name=".Views.GyroscopeUnit"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".GyroscopeUnit"
-            android:screenOrientation="landscape"></activity>
+            android:name=".Views.WaitingArea"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".WaitingArea"
-            android:screenOrientation="landscape"></activity>
+            android:name=".Views.StatisticActivity"
+            android:screenOrientation="landscape" />
         <activity
-            android:name=".Statistic"
-            android:screenOrientation="landscape"></activity>
-        <activity
-            android:name=".Settings"
+            android:name=".Views.Settings"
             android:screenOrientation="landscape">
 
         </activity>

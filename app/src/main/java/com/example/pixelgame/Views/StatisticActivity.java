@@ -1,10 +1,16 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-public class Statistic extends BaseView {
+import com.example.pixelgame.Data.AppData;
+import com.example.pixelgame.Data.GameStatistic;
+import com.example.pixelgame.Data.PlayerData;
+import com.example.pixelgame.Data.SummaryStatistic;
+import com.example.pixelgame.R;
+
+public class StatisticActivity extends BaseView {
 
     PlayerData data;
     SummaryStatistic summary;
@@ -86,7 +92,7 @@ public class Statistic extends BaseView {
     }
 
     private void viewSummary() {
-        title.setText(getString(R.string.summary, data.playerName));
+        title.setText(getString(R.string.summary, data.getPlayerName()));
         playedGames.setText(getString(R.string.playedGames, summary.playedGames));
         wonGames.setText(getString(R.string.wonGames, summary.wonGames));
         winStreak.setText(getString(R.string.winStreak, summary.longestWinningStreak.getTopWinningStreak()));

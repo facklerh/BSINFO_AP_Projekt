@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -16,7 +16,6 @@ public class GyroscopeUnit extends BaseView implements SensorEventListener {
     MyCanvas myCanvas;
     private SensorManager sensorManager;
     private Sensor sensor;
-    GyroControl gyroControl;
 
     public static float pitch = 0;
     public static float roll = 0;
@@ -31,7 +30,6 @@ public class GyroscopeUnit extends BaseView implements SensorEventListener {
         setContentView(new GamePanel(this));
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        gyroControl = new GyroControl(sensorManager, sensor, TAG);
     }
 
     @Override
@@ -92,14 +90,6 @@ public class GyroscopeUnit extends BaseView implements SensorEventListener {
         Log.wtf(TAG, "Roll: " + roll);
         Log.wtf(TAG, "--------------------------");
     }
-//                SensorManager.getRotationMatrixFromVector(gyroControl.rotation, sensorEvent.values);
-//                StringBuilder sb= new StringBuilder();
-//                for (float value : sensorEvent.values) {
-//                    sb.append(String.format("%.2f",value)).append(",\t");
-//                }
-//                Log.wtf(TAG, "Values: " + sb.toString());
-//                Log.wtf(TAG, "-------------------------------------");
-    // gyroControl.print();
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {

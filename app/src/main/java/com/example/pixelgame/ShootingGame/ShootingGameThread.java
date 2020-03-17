@@ -2,7 +2,7 @@ package com.example.pixelgame.ShootingGame;
 
 import android.util.Log;
 
-import com.example.pixelgame.GameObject;
+import com.example.pixelgame.GameObjects.GameObject;
 
 import java.io.OutputStream;
 import java.util.ArrayList;

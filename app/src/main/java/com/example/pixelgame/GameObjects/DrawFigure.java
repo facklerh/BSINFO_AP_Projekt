@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

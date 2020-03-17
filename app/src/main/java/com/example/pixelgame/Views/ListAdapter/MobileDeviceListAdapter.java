@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views.ListAdapter;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.pixelgame.Data.AppData;
+import com.example.pixelgame.Data.GameStatistic;
+import com.example.pixelgame.Data.PlayerData;
+import com.example.pixelgame.R;
 
 import java.util.Collection;
 import java.util.HashSet;

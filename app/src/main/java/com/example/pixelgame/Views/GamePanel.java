@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,8 +7,13 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+import com.example.pixelgame.GameObjects.Ammunition_Shot;
+import com.example.pixelgame.GameObjects.DrawFigure;
+import com.example.pixelgame.GameObjects.PlayerObject;
+import com.example.pixelgame.GameObjects.PlayerRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +21,7 @@ import java.util.List;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int RECTANGLE_SIZE = 200;
-    public static final int rectangle_HalfSize = RECTANGLE_SIZE /2;
+    public static final int rectangle_HalfSize = RECTANGLE_SIZE / 2;
     public static final int BORDERDIST = 1;
 
     private GameThread gameThread;
@@ -69,7 +74,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         switch (event.getAction()) {
             case (MotionEvent.ACTION_DOWN):
                 break;
-                //Log.wtf("TAG", event.toString());
+            //Log.wtf("TAG", event.toString());
             case MotionEvent.ACTION_UP:
                 //Log.wtf("TAG", event.toString());
                 shots.add(new Ammunition_Shot(1, playerPoint.x, playerPoint.y, RECTANGLE_SIZE));
@@ -85,7 +90,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         return true;
     }
 
-    public void update (Canvas canvas) {
+    public void update(Canvas canvas) {
         float s_roll = 0;
         float s_pitch = 0;
         float a = 1.01f;
@@ -122,13 +127,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 shot.update(shot.point);
             }
             // bei kollision objekt zerstören
-        }
-        else {
+        } else {
             int x = canvas.getWidth() / 2;
             int y = canvas.getHeight() / 2;
             //player = new DrawFigure(new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize,  y + rectangle_HalfSize), Color.BLACK);
             //player = new PlayerRectangle(Color.RED, new Rect((x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize,  y + rectangle_HalfSize), Color.RED));
-            player = new PlayerRectangle(Color.RED, new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize,  y + rectangle_HalfSize));
+            player = new PlayerRectangle(Color.RED, new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize, y + rectangle_HalfSize));
             playerPoint = new Point(x, y);
         }
     }

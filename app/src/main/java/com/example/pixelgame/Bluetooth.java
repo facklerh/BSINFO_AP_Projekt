@@ -11,21 +11,23 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import com.example.pixelgame.Views.BaseView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Set;
 
 import static android.bluetooth.BluetoothClass.Device.Major.PHONE;
-import static com.example.pixelgame.AppData.APP_NAME;
-import static com.example.pixelgame.AppData.APP_UUID;
+import static com.example.pixelgame.Data.AppData.APP_NAME;
+import static com.example.pixelgame.Data.AppData.APP_UUID;
 
 public class Bluetooth {
     // BluetoothAdapter things
 
     private static final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 
-    static boolean isNotSupported() {
+    public static boolean isNotSupported() {
         return adapter == null;
     }
 

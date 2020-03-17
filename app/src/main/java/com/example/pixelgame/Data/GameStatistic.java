@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Data;
 
 import android.bluetooth.BluetoothDevice;
 

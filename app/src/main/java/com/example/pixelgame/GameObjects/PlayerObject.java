@@ -1,12 +1,10 @@
-package com.example.pixelgame;
+package com.example.pixelgame.GameObjects;
 
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-public abstract class PlayerObject implements GameObject{
+public abstract class PlayerObject implements GameObject {
 
     private float health;
     private int shots;
@@ -32,7 +30,7 @@ public abstract class PlayerObject implements GameObject{
     }
 
     public void changeColor() {
-        float factor = this.health/this.max_health;
+        float factor = this.health / this.max_health;
         int alpha = Math.round(Color.alpha(color) * factor);
         int red = Color.red(color);
         int green = Color.green(color);

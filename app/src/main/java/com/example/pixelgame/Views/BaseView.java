@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.pixelgame.Data.AppData;
+import com.example.pixelgame.R;
 
 public abstract class BaseView extends AppCompatActivity {
 
@@ -145,7 +148,7 @@ public abstract class BaseView extends AppCompatActivity {
         showErrorDialog(errorTitle, errorMessage, R.string.ok, null);
     }
 
-    void showErrorDialog(int errorTitle, int errorMessage, int buttonMessage, DialogInterface.OnClickListener onClick) {
+    public void showErrorDialog(int errorTitle, int errorMessage, int buttonMessage, DialogInterface.OnClickListener onClick) {
         new AlertDialog.Builder(this)
                 .setTitle(errorTitle)
                 .setMessage(errorMessage)

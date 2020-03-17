@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.app.AlertDialog;
 import android.hardware.Sensor;
@@ -6,6 +6,10 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.pixelgame.Bluetooth;
+import com.example.pixelgame.Data.AppData;
+import com.example.pixelgame.R;
 
 public class MainActivity extends BaseView {
 
@@ -61,6 +65,6 @@ public class MainActivity extends BaseView {
     private void initButtons() {
         initNavigationButton(R.id.btn_play, ConnectionActivity.class);
         initNavigationButton(R.id.btn_settings, Settings.class);
-        initNavigationButton(R.id.btn_statistic, Statistic.class);
+        initNavigationButton(R.id.btn_statistic, StatisticActivity.class);
     }
 }

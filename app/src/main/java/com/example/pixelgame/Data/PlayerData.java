@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Data;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementMap;

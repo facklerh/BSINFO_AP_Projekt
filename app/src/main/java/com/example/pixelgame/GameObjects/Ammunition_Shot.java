@@ -1,4 +1,4 @@
-package com.example.pixelgame;
+package com.example.pixelgame.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 
-public class Ammunition_Shot implements GameObject{
+public class Ammunition_Shot implements GameObject {
 
     Rect shot;
     public Point point;
@@ -37,15 +37,14 @@ public class Ammunition_Shot implements GameObject{
 
     @Override
     public void update(Point pointe) {
-    if (point != null) {
-        point.offset(0, -10);
-        shot.set(point.x - shot.width()/2, point.y - shot.height()/2, point.x + shot.width()/2, point.y + shot.height()/2);
-    }
-    else {
-        //xPosition = xPosition + //halbe munitionsgröße;
-        //yPosition = yPosition + ;
-        shot = new Rect(xPosition - AMMUNITION_SIZE, yPosition - (rectangle_size/2) -AMMUNITION_SIZE, xPosition + AMMUNITION_SIZE, yPosition - rectangle_size/2);
-        point = new Point(xPosition , yPosition - rectangle_size/2 - AMMUNITION_SIZE/2);
-    }
+        if (point != null) {
+            point.offset(0, -10);
+            shot.set(point.x - shot.width() / 2, point.y - shot.height() / 2, point.x + shot.width() / 2, point.y + shot.height() / 2);
+        } else {
+            //xPosition = xPosition + //halbe munitionsgröße;
+            //yPosition = yPosition + ;
+            shot = new Rect(xPosition - AMMUNITION_SIZE, yPosition - (rectangle_size / 2) - AMMUNITION_SIZE, xPosition + AMMUNITION_SIZE, yPosition - rectangle_size / 2);
+            point = new Point(xPosition, yPosition - rectangle_size / 2 - AMMUNITION_SIZE / 2);
+        }
     }
 }

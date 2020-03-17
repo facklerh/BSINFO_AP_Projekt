@@ -1,7 +1,9 @@
-package com.example.pixelgame;
+package com.example.pixelgame.Views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.example.pixelgame.Bluetooth;
 
 import java.io.IOException;
 import java.io.InputStream;
