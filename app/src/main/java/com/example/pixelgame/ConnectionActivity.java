@@ -50,13 +50,20 @@ public class ConnectionActivity extends BaseView {
     }
 
     private void initViews() {
-        initListAdapter();
         initListView();
+        initListAdapter();
         initButtons();
     }
 
     private void initListAdapter() {
+        Log.i(TAG, "reset List");
         devices = new MobileDeviceListAdapter(this);
+        listView.setAdapter(devices);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         devices.addAll(Bluetooth.getBonded());
         Bluetooth.discover();
     }
@@ -80,12 +87,17 @@ public class ConnectionActivity extends BaseView {
 
     private void initListView() {
         listView = findViewById(R.id.list_mobile_device);
-        listView.setAdapter(devices);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (acceptThread == null && connectThread == null) {
-                    tryConnection(devices.getItem(position));
+                final BluetoothDevice device = devices.getItem(position);
+                if (acceptThread == null || !acceptThread.allowed.equals(device)) {
+                    killThreads();
+                    tryConnection(device);
+                } else if (acceptThread.allowed.equals(device)) {
+                    Log.i(TAG, "Started new connection try to " + device.getName());
+                    killConnectThread();
+                    connectTo(device);
                 }
             }
         });
@@ -101,7 +113,7 @@ public class ConnectionActivity extends BaseView {
 
     private void awaitConnection(BluetoothDevice pairingDevice) {
         if (acceptThread == null) {
-            Log.i(TAG, "await connection of" + pairingDevice.getName());
+            Log.i(TAG, "await connection of " + pairingDevice.getName());
             acceptThread = new AcceptThread(pairingDevice);
             acceptThread.start();
         }
@@ -147,20 +159,20 @@ public class ConnectionActivity extends BaseView {
     }
 
     private synchronized void killThreads() {
+        killAcceptThread();
+        killConnectThread();
+    }
+
+    private void killAcceptThread() {
         if (acceptThread != null) {
-            try {
-                acceptThread.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            acceptThread.close();
             acceptThread = null;
         }
+    }
+
+    private void killConnectThread() {
         if (connectThread != null) {
-            try {
-                connectThread.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            connectThread.close();
             connectThread = null;
         }
     }
@@ -169,9 +181,13 @@ public class ConnectionActivity extends BaseView {
         Socket socket = null;
 
         @Override
-        public void close() throws IOException {
-            socket.close();
-            interrupt();
+        public void close() {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                Log.d(TAG, "closing socket failed");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -201,7 +217,8 @@ public class ConnectionActivity extends BaseView {
         private void listen() {
             BluetoothSocket connectedSocket;
             try {
-                connectedSocket = socket.accept(5000);
+                Log.i(TAG, "socket accept");
+                connectedSocket = socket.accept();
                 if (connectedSocket != null) {
                     final BluetoothDevice remote = connectedSocket.getRemoteDevice();
                     if (remote.equals(allowed)) {
@@ -213,6 +230,7 @@ public class ConnectionActivity extends BaseView {
                     Log.d(TAG, "could not find device in time");
                 }
             } catch (IOException e) {
+                close();
                 Log.d(TAG, "unknown error");
                 e.printStackTrace();
             }
@@ -234,9 +252,12 @@ public class ConnectionActivity extends BaseView {
         public void run() {
             if (socket != null) {
                 try {
+                    Log.i(TAG, "socket connect");
                     socket.connect();
                     launchWaitingArea(socket);
                 } catch (IOException e) {
+                    close();
+                    e.printStackTrace();
                     Log.d(TAG, "Could not connect to device");
                 }
             }
