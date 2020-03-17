@@ -23,20 +23,19 @@
         </activity>
         <activity
             android:name=".Game"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ConnectionActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".GyroscopeUnit"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".WaitingArea"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Statistic"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Settings"
             android:screenOrientation="landscape">
