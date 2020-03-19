@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.example.pixelgame.Bluetooth;
 import com.example.pixelgame.Data.AppData;
 import com.example.pixelgame.R;
+import com.example.pixelgame.Views.Gyroscope.GyroscopeUnit;
 
 public class MainActivity extends BaseView {
 

@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.example.pixelgame.Bluetooth;
 import com.example.pixelgame.R;
+import com.example.pixelgame.Views.Game.GameActivity;
 import com.example.pixelgame.Views.ListAdapter.MobileDeviceListAdapter;
 
 import java.io.Closeable;
@@ -154,7 +155,7 @@ public class ConnectionActivity extends BaseView {
     private synchronized void launchWaitingArea(BluetoothSocket socket) {
         killThreads();
         Bluetooth.setConnection(socket);
-        launchActivity(WaitingArea.class);
+        launchActivity(GameActivity.class);
     }
 
     private synchronized void enable() {
