@@ -71,6 +71,25 @@ public class Bluetooth {
         }
     }
 
+    public static synchronized void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                connection = null;
+            }
+        }
+    }
+
+    public static BluetoothDevice getConnectedDevice() {
+        if (connection != null) {
+            return connection.getRemoteDevice();
+        }
+        return null;
+    }
+
     public static InputStream getInputStream() throws IOException {
         if (connection != null) {
             return connection.getInputStream();
