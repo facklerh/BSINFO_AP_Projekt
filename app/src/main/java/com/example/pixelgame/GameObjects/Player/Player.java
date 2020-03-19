@@ -35,6 +35,11 @@ public abstract class Player extends GameObject {
         return null;
     }
 
+    public void updateSpeed(int xSpeed, int ySpeed) {
+        this.xSpeed = xSpeed < 0 ? Math.max(xSpeed, -MAX_SPEED) : Math.min(xSpeed, MAX_SPEED);
+        this.ySpeed = ySpeed < 0 ? Math.max(ySpeed, -MAX_SPEED) : Math.min(ySpeed, MAX_SPEED);
+    }
+
     public void updateColor() {
         color.setAlpha(255 * health / maxHealth);
     }
