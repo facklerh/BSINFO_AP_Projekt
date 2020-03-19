@@ -5,7 +5,16 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
+import static com.example.pixelgame.MsgUtil.concatBytes;
+import static com.example.pixelgame.MsgUtil.floatFromBytes;
+import static com.example.pixelgame.MsgUtil.getByteSection;
+import static com.example.pixelgame.MsgUtil.intFromBytes;
+import static com.example.pixelgame.MsgUtil.intToBytes;
+import static com.example.pixelgame.Rules.SCREEN_WIDTH;
+
 public class Circle extends Shape {
+    public static final int BYTE_SIZE = 13; // type as byte(1) + relative x as int(4) + radius int(4)
+
     final int radius;
 
     public Circle(int x, int y, int radius) {
@@ -67,5 +76,18 @@ public class Circle extends Shape {
     @Override
     public int leftest() {
         return center.x + radius;
+    }
+
+    public static Circle fromBytes(byte[] bytes) {
+        float relativeX = floatFromBytes(getByteSection(bytes, 1, 5));
+        int radius = intFromBytes(getByteSection(bytes, 5, 9));
+        return new Circle(new Point((int) (relativeX * SCREEN_WIDTH), -radius), radius);
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] superBytes = super.toBytes();
+        byte[] radiusBytes = intToBytes(radius);
+        return concatBytes(superBytes, radiusBytes);
     }
 }

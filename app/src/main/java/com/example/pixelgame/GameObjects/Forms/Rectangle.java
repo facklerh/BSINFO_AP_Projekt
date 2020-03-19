@@ -5,7 +5,15 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.Log;
 
+import static com.example.pixelgame.MsgUtil.concatBytes;
+import static com.example.pixelgame.MsgUtil.floatFromBytes;
+import static com.example.pixelgame.MsgUtil.getByteSection;
+import static com.example.pixelgame.MsgUtil.intFromBytes;
+import static com.example.pixelgame.MsgUtil.intToBytes;
+import static com.example.pixelgame.Rules.SCREEN_WIDTH;
+
 public class Rectangle extends Shape {
+    public static final int BYTE_SIZE = 13; // type as byte(1) + relative x as int(4) + widthHalf int(4) + heightHalf int(4)
 
     final int widthHalf;
     final int heightHalf;
@@ -70,5 +78,20 @@ public class Rectangle extends Shape {
         // canvas.rotate(degree);
         canvas.drawRect(center.x - widthHalf, center.y - heightHalf, center.x + widthHalf, center.y + heightHalf, color);
         // canvas.rotate(-degree);
+    }
+
+    public static Rectangle fromBytes(byte[] bytes) {
+        float relativeX = floatFromBytes(getByteSection(bytes, 1, 5));
+        int widthHalf = intFromBytes(getByteSection(bytes, 5, 9));
+        int heightHalf = intFromBytes(getByteSection(bytes, 9, BYTE_SIZE));
+        return new Rectangle(new Point((int) (relativeX * SCREEN_WIDTH), -widthHalf), widthHalf * 2, heightHalf * 2);
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] superBytes = super.toBytes();
+        byte[] widthHalfBytes = intToBytes(widthHalf);
+        byte[] heightHalfBytes = intToBytes(heightHalf);
+        return concatBytes(superBytes, widthHalfBytes, heightHalfBytes);
     }
 }

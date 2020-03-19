@@ -7,6 +7,8 @@ import android.graphics.Point;
 import android.util.Log;
 
 public class Triangle extends Shape {
+    public static final int BYTE_SIZE = 13; // type as byte(1) + relative x as int(4) + radius int(4)
+
     Point top;
     Point left;
     Point right;
@@ -29,7 +31,7 @@ public class Triangle extends Shape {
             case Rect:
             default:
                 Log.e(TAG, "Triangle collision with " + other.getType().name() + " not supported yet");
-                return false;
+                throw new IllegalStateException();
         }
     }
 
@@ -91,5 +93,17 @@ public class Triangle extends Shape {
     @Override
     public void moveTo(int x, int y) {
         super.moveTo(center.x - x, center.y - y);
+    }
+
+    public static Triangle fromBytes(byte[] bytes) {
+        throw new IllegalStateException();
+        // return null;
+    }
+
+    @Override
+    public byte[] toBytes() {
+        throw new IllegalStateException();
+        // byte[] superBytes = super.toBytes();
+        // return concatBytes();
     }
 }

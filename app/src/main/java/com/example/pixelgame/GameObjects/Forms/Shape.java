@@ -4,8 +4,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 
-public abstract class Shape {
+import com.example.pixelgame.GameObjects.Byteable;
+
+import static com.example.pixelgame.MsgUtil.concatBytes;
+import static com.example.pixelgame.MsgUtil.floatToBytes;
+import static com.example.pixelgame.Rules.SCREEN_WIDTH;
+
+public abstract class Shape implements Byteable {
     public static final String TAG = "Collision";
+    public static final int MIN_BYTE_SIZE = 9; // type as byte(1) + spawn x as int(4) + distance to highest point as int(4)
 
     Point center;
     float degree;
@@ -62,4 +69,25 @@ public abstract class Shape {
     abstract public int rightest();
 
     abstract public int leftest();
+
+    public static Shape fromBytes(byte[] bytes) {
+        ShapeType type = ShapeType.fromByte(bytes[0]);
+        switch (type) {
+            case Rect:
+                return Rectangle.fromBytes(bytes);
+            case Tri:
+                return Triangle.fromBytes(bytes);
+            case Circle:
+                return Circle.fromBytes(bytes);
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
+    @Override
+    public byte[] toBytes() {
+        byte[] typeByte = new byte[]{getType().asByte()};
+        byte[] relativeXBytes = floatToBytes(((float) this.center.x) / SCREEN_WIDTH);
+        return concatBytes(typeByte, relativeXBytes);
+    }
 }
