@@ -25,10 +25,10 @@
             android:name=".Views.ConnectionActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Views.GyroscopeUnit"
+            android:name=".Views.Gyroscope.GyroscopeUnit"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Views.WaitingArea"
+            android:name=".Views.Game.GameActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".Views.StatisticActivity"

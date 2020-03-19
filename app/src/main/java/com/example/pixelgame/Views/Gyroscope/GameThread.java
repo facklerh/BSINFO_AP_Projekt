@@ -1,4 +1,4 @@
-package com.example.pixelgame.Views;
+package com.example.pixelgame.Views.Gyroscope;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;

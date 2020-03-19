@@ -1,4 +1,4 @@
-package com.example.pixelgame.Views;
+package com.example.pixelgame.Views.Gyroscope;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,10 +10,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.pixelgame.GameObjects.Ammunition_Shot;
-import com.example.pixelgame.GameObjects.DrawFigure;
-import com.example.pixelgame.GameObjects.PlayerObject;
-import com.example.pixelgame.GameObjects.PlayerRectangle;
+import com.example.pixelgame.GameObjects.Bullet;
+import com.example.pixelgame.GameObjects.Player.Player;
+import com.example.pixelgame.GameObjects.Player.PlayerSquare;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +20,15 @@ import java.util.List;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int RECTANGLE_SIZE = 200;
-    public static final int rectangle_HalfSize = RECTANGLE_SIZE / 2;
+    public static final int rectangle_HalfdSize = RECTANGLE_SIZE / 2;
     public static final int BORDERDIST = 1;
 
     private GameThread gameThread;
-    private DrawFigure player2;
     private Point playerPoint;
-    private PlayerObject player;
-    private Ammunition_Shot shot;
+    private Player player;
+    private Bullet shot;
 
-    private List<Ammunition_Shot> shots = new ArrayList<>();
+    private List<Bullet> shots = new ArrayList<>();
 
     public GamePanel(Context context) {
         super(context);
@@ -77,7 +75,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             //Log.wtf("TAG", event.toString());
             case MotionEvent.ACTION_UP:
                 //Log.wtf("TAG", event.toString());
-                shots.add(new Ammunition_Shot(1, playerPoint.x, playerPoint.y, RECTANGLE_SIZE));
+                shots.add(new Bullet(1, playerPoint.x, playerPoint.y, RECTANGLE_SIZE));
                 long startTime = System.currentTimeMillis();
                 // bis endtime 300ms
                 //shot = new Ammunition_Shot(1, playerPoint.x, playerPoint.y, RECTANGLE_SIZE);
@@ -123,7 +121,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             //if collision, call getDamage(), if return value < 0 -> gameover
             player.update(playerPoint);
             //shot.update(shot.point);
-            for (Ammunition_Shot shot : shots) {
+            for (Bullet shot : shots) {
                 shot.update(shot.point);
             }
             // bei kollision objekt zerstören
@@ -132,7 +130,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             int y = canvas.getHeight() / 2;
             //player = new DrawFigure(new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize,  y + rectangle_HalfSize), Color.BLACK);
             //player = new PlayerRectangle(Color.RED, new Rect((x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize,  y + rectangle_HalfSize), Color.RED));
-            player = new PlayerRectangle(Color.RED, new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize, y + rectangle_HalfSize));
+            player = new PlayerSquare(Color.RED, new Rect(x - rectangle_HalfSize, y - rectangle_HalfSize, x + rectangle_HalfSize, y + rectangle_HalfSize));
             playerPoint = new Point(x, y);
         }
     }
@@ -142,7 +140,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         canvas.drawColor(Color.GRAY);
         player.draw(canvas);
-        for (Ammunition_Shot shot : shots) {
+        for (Bullet shot : shots) {
             shot.draw(canvas);
         }
         //shot.draw(canvas);
