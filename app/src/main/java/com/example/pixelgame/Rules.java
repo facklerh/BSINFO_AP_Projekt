@@ -47,4 +47,8 @@ public class Rules {
         long SECOND_IN_MILLIS = 1000;
         long MAX_MILLIS_PER_FRAME = SECOND_IN_MILLIS / MAX_FPS;
     }
+
+    // Damage
+
+    public static final int BULLET_DAMAGE = 10;
 }

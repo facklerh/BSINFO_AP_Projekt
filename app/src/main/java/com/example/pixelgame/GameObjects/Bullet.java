@@ -2,6 +2,7 @@ package com.example.pixelgame.GameObjects;
 
 import com.example.pixelgame.GameObjects.Forms.Shape;
 import com.example.pixelgame.GameObjects.Forms.Square;
+import com.example.pixelgame.Rules;
 
 import static com.example.pixelgame.MsgUtil.concatBytes;
 import static com.example.pixelgame.MsgUtil.getByteSection;
@@ -22,6 +23,10 @@ public class Bullet extends GameObject implements Byteable {
         super(shape);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+    }
+
+    public int getDamage() {
+        return Rules.BULLET_DAMAGE;
     }
 
     public static Bullet fromBytes(byte[] speedBytes, byte[] shapeBytes) {
