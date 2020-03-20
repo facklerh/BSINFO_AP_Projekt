@@ -1,14 +1,13 @@
 package com.example.pixelgame.Views;
 
 import android.app.AlertDialog;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.pixelgame.Bluetooth;
 import com.example.pixelgame.Data.AppData;
+import com.example.pixelgame.GyroSensor;
 import com.example.pixelgame.R;
 import com.example.pixelgame.Views.Gyroscope.GyroscopeUnit;
 
@@ -19,7 +18,7 @@ public class MainActivity extends BaseView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) == null) {
+        if (!GyroSensor.initGyroSensor(this)) {
             showExitDialog(R.string.error_Sensor, R.string.errM_noSensorSupport);
         } else if (Bluetooth.isNotSupported()) {
             showExitDialog(R.string.error_BT, R.string.errM_noBTSupport);
