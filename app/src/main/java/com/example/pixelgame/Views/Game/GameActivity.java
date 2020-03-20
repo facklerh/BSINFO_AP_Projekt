@@ -57,19 +57,6 @@ public class GameActivity extends BaseView {
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
-    private boolean registerRotationListener() {
-        if (sensorManager != null && sensor != null && rListener != null) {
-            return sensorManager.registerListener(rListener, sensor, SensorManager.SENSOR_DELAY_GAME);
-        }
-        return false;
-    }
-
-    private void unregisterRotationListener() {
-        if (sensorManager != null && rListener != null) {
-            sensorManager.unregisterListener(rListener);
-        }
-    }
-
     private void initSelectionScreen() {
 
     }
