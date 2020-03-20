@@ -5,24 +5,25 @@ import com.example.pixelgame.GameObjects.Forms.Square;
 import com.example.pixelgame.Rules;
 
 import static com.example.pixelgame.MsgUtil.concatBytes;
-import static com.example.pixelgame.MsgUtil.getByteSection;
-import static com.example.pixelgame.MsgUtil.intFromBytes;
-import static com.example.pixelgame.MsgUtil.intToBytes;
 
 public class Bullet extends GameObject implements Byteable {
-    public static final int SPEED_BYTE_LENGTH = 8; // this does not include shape
+    public static final int REMAINING_BYTE_LENGTH = 3; // this does not include shape
     private static final int STANDARD_SIZE = 20;
 
-    public Bullet(int x, int y, int xSpeed, int ySpeed) {
+    public final byte strength;
+
+    public Bullet(int x, int y, byte xSpeed, byte ySpeed, byte strength) {
         super(new Square(x, y, STANDARD_SIZE));
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.strength = strength;
     }
 
-    public Bullet(Shape shape, int xSpeed, int ySpeed) {
+    public Bullet(Shape shape, byte xSpeed, byte ySpeed, byte strength) {
         super(shape);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.strength = strength;
     }
 
     public int getDamage() {
@@ -33,22 +34,22 @@ public class Bullet extends GameObject implements Byteable {
         return shape.isOutOfScreenHorizontal();
     }
 
-    public static Bullet fromBytes(byte[] speedBytes, byte[] shapeBytes) {
-        if (speedBytes.length != SPEED_BYTE_LENGTH || shapeBytes.length < Shape.MIN_BYTE_SIZE) {
+    public static Bullet fromBytes(byte[] remainingBytes, byte[] shapeBytes) {
+        if (remainingBytes.length != REMAINING_BYTE_LENGTH || shapeBytes.length < Shape.MIN_BYTE_SIZE) {
             throw new IllegalArgumentException();
         }
         Shape shape = Shape.fromBytes(shapeBytes);
-        int xSpeed = intFromBytes(getByteSection(speedBytes, 0, 4));
-        int ySpeed = intFromBytes(getByteSection(speedBytes, 4, 4));
-        return new Bullet(shape, xSpeed, ySpeed);
+        byte xSpeed = remainingBytes[0];
+        byte ySpeed = remainingBytes[1];
+        byte strength = remainingBytes[2];
+        return new Bullet(shape, xSpeed, ySpeed, strength);
     }
 
     @Override
     public byte[] toBytes() {
         byte[] shapeBytes = this.shape.toBytes();
-        byte[] xSpeedBytes = intToBytes(-this.xSpeed);
-        byte[] ySpeedBytes = intToBytes(-this.ySpeed);
+        byte[] remainingBytes = new byte[]{xSpeed, ySpeed, strength};
         // byte[] colorBytes = intToBytes(this.color.getColor());
-        return concatBytes(xSpeedBytes, ySpeedBytes, /*colorBytes,*/ shapeBytes);
+        return concatBytes(remainingBytes, /*colorBytes,*/ shapeBytes);
     }
 }

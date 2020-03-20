@@ -10,10 +10,8 @@ public abstract class GameObject {
     public final Shape shape;
     public Paint color;
 
-    public int xSpeed = 0;
-    public int ySpeed = 0;
-    public static final int MAX_SPEED = 15;
-    public static final int MAX_SPEED_SQUARED = MAX_SPEED * MAX_SPEED;
+    protected byte xSpeed = 0;
+    protected byte ySpeed = 0;
 
     public GameObject(Shape shape) {
         this(shape, new Paint(Color.BLACK));

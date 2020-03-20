@@ -13,7 +13,7 @@ import static com.example.pixelgame.MsgUtil.intToBytes;
 import static com.example.pixelgame.Rules.SCREEN_WIDTH;
 
 public class Circle extends Shape {
-    public static final int BYTE_SIZE = 13; // type as byte(1) + relative x as int(4) + radius int(4)
+    public static final int BYTE_SIZE = 9; // type as byte(1) + relative x as int(4) + radius int(4)
 
     final int radius;
 

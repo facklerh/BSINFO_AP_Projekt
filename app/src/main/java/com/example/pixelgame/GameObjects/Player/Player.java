@@ -10,12 +10,14 @@ import static com.example.pixelgame.Rules.BORDER_BOTTOM;
 import static com.example.pixelgame.Rules.BORDER_LEFT;
 import static com.example.pixelgame.Rules.BORDER_RIGHT;
 import static com.example.pixelgame.Rules.BORDER_TOP;
+import static com.example.pixelgame.Rules.MAX_SPEED;
 
 public abstract class Player extends GameObject {
 
     final private int maxHealth;
     private int health;
-    private int shots;
+    // private int shots;
+    // private int shotCoolDown;
 
     public Player(Shape shape, Paint color, int health) {
         super(shape, color);
@@ -36,9 +38,7 @@ public abstract class Player extends GameObject {
         return health;
     }
 
-    public Bullet shot() {
-        return null;
-    }
+    abstract public Bullet shoot(byte strength);
 
     @Override
     public void update() {
@@ -57,9 +57,9 @@ public abstract class Player extends GameObject {
         }
     }
 
-    public void updateSpeed(int xSpeed, int ySpeed) {
-        this.xSpeed = xSpeed < 0 ? Math.max(xSpeed, -MAX_SPEED) : Math.min(xSpeed, MAX_SPEED);
-        this.ySpeed = ySpeed < 0 ? Math.max(ySpeed, -MAX_SPEED) : Math.min(ySpeed, MAX_SPEED);
+    public void updateSpeed(byte xSpeed, byte ySpeed) {
+        this.xSpeed = xSpeed < -MAX_SPEED ? -MAX_SPEED : (xSpeed > MAX_SPEED ? MAX_SPEED : xSpeed);
+        this.ySpeed = ySpeed < -MAX_SPEED ? -MAX_SPEED : (ySpeed > MAX_SPEED ? MAX_SPEED : ySpeed);
     }
 
     public void updateColor() {
