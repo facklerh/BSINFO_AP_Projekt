@@ -1,11 +1,19 @@
 package com.example.pixelgame;
 
 import android.content.res.Resources;
+import android.hardware.SensorManager;
 
-public class Rules {
+public final class Rules {
+    private Rules() {
+    }
 
     public static final int SCREEN_WIDTH = Resources.getSystem().getDisplayMetrics().widthPixels;
     public static final int SCREEN_HEIGHT = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+    // Orientation
+
+    public static final int WORLD_AXIS_X = SensorManager.AXIS_X;
+    public static final int WORLD_AXIS_Y = SensorManager.AXIS_Y;
 
     // Border
 
@@ -47,6 +55,11 @@ public class Rules {
         long SECOND_IN_MILLIS = 1000;
         long MAX_MILLIS_PER_FRAME = SECOND_IN_MILLIS / MAX_FPS;
     }
+
+    // Speed
+
+    public static final byte MAX_SPEED = 15;
+    public static final int MAX_SPEED_SQUARED = MAX_SPEED * MAX_SPEED;
 
     // Damage
 

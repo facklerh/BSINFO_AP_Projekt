@@ -22,8 +22,10 @@ import static android.bluetooth.BluetoothClass.Device.Major.PHONE;
 import static com.example.pixelgame.Data.AppData.APP_NAME;
 import static com.example.pixelgame.Data.AppData.APP_UUID;
 
-public class Bluetooth {
+public final class Bluetooth {
     // BluetoothAdapter things
+    private Bluetooth() {
+    }
 
     private static final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
 

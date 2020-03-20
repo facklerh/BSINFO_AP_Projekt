@@ -2,7 +2,10 @@ package com.example.pixelgame;
 
 import java.nio.ByteBuffer;
 
-public class MsgUtil {
+public final class MsgUtil {
+    private MsgUtil() {
+    }
+
     public interface Opcodes {
         // State opcodes
         byte CONNECTED = 0;
