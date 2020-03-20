@@ -7,11 +7,16 @@ import android.hardware.SensorManager;
 
 import com.example.pixelgame.GameObjects.Player.Player;
 
+import static com.example.pixelgame.Rules.WORLD_AXIS_X;
+import static com.example.pixelgame.Rules.WORLD_AXIS_Y;
+
 public class RotationListener implements SensorEventListener {
     private static final int RADIANS_TO_DEGREES = -57;
     Player player;
 
     public RotationListener(Player player) {
+        if (player == null)
+            throw new IllegalArgumentException();
         this.player = player;
     }
 
@@ -31,14 +36,13 @@ public class RotationListener implements SensorEventListener {
     private void updatePlayerSpeed(float[] vector) {
         float[] rotationMatrix = new float[9];
         SensorManager.getRotationMatrixFromVector(rotationMatrix, vector);
-        int worldAxisX = SensorManager.AXIS_X;
-        int worldAxisY = SensorManager.AXIS_Y;
         float[] adjustedRotationMatrix = new float[9];
-        SensorManager.remapCoordinateSystem(rotationMatrix, worldAxisX, worldAxisY, adjustedRotationMatrix);
+        SensorManager.remapCoordinateSystem(rotationMatrix, WORLD_AXIS_X, WORLD_AXIS_Y, adjustedRotationMatrix);
         float[] orientation = new float[3];
         SensorManager.getOrientation(adjustedRotationMatrix, orientation);
-        final int pitch = Math.round(orientation[1] * RADIANS_TO_DEGREES);
-        final int roll = Math.round(orientation[2] * RADIANS_TO_DEGREES);
+        // TODO: ensure pitch and roll matches byte range from -128 to 127
+        final byte pitch = (byte) (Math.round(orientation[1] * RADIANS_TO_DEGREES));
+        final byte roll = (byte) (Math.round(orientation[2] * RADIANS_TO_DEGREES));
         player.updateSpeed(pitch, roll);
     }
 
