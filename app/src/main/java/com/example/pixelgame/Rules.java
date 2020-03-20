@@ -1,6 +1,7 @@
 package com.example.pixelgame;
 
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.hardware.SensorManager;
 
 public final class Rules {
@@ -33,6 +34,12 @@ public final class Rules {
         setBorderBottom(bottom);
     }
 
+    public static Point getBorderCenter() {
+        int xCenter = (BORDER_RIGHT - BORDER_LEFT) / 2;
+        int yCenter = (BORDER_BOTTOM - BORDER_TOP) / 2;
+        return new Point(xCenter, yCenter);
+    }
+
     public static void setBorderLeft(int borderLeft) {
         BORDER_LEFT = borderLeft;
     }
@@ -49,7 +56,12 @@ public final class Rules {
         BORDER_BOTTOM = borderBottom;
     }
 
-    // FPS
+    // Sizes
+
+    public interface Size {
+        int SQUARE = 50;
+    }
+
     public interface FPS {
         long MAX_FPS = 30;
         long SECOND_IN_MILLIS = 1000;
