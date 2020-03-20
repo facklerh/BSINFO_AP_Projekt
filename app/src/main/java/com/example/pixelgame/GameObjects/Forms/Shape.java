@@ -73,6 +73,7 @@ public abstract class Shape implements Byteable {
     public static Shape fromBytes(byte[] bytes) {
         ShapeType type = ShapeType.fromByte(bytes[0]);
         switch (type) {
+            case Square:
             case Rect:
                 return Rectangle.fromBytes(bytes);
             case Tri:

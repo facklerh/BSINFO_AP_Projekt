@@ -1,7 +1,7 @@
 package com.example.pixelgame.GameObjects.Forms;
 
 public enum ShapeType {
-    Circle, Rect, Tri;
+    Circle, Rect, Square, Tri;
 
     public static ShapeType fromByte(byte ordinal) {
         if (ordinal < 0 || ordinal > values().length)

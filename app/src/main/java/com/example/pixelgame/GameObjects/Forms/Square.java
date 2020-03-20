@@ -10,4 +10,9 @@ public class Square extends Rectangle {
     public Square(Point center, int side) {
         super(center, side, side);
     }
+
+    @Override
+    public ShapeType getType() {
+        return ShapeType.Square;
+    }
 }
