@@ -16,9 +16,9 @@ import static com.example.pixelgame.Rules.SCREEN_WIDTH;
 
 public abstract class Shape implements Byteable {
     public static final String TAG = "Collision";
-    public static final int MIN_BYTE_SIZE = 9; // type as byte(1) + spawn x as int(4) + distance to highest point as int(4)
+    public static final int MIN_BYTE_SIZE = 6; // type as byte(1) + spawn x as int(4) + distance to highest point as byte(1)
 
-    Point center;
+    protected Point center;
     float degree;
 
     public Shape(Point center) {
@@ -28,6 +28,10 @@ public abstract class Shape implements Byteable {
     public Shape(Point center, float degree) {
         this.center = center;
         this.degree = degree;
+    }
+
+    public int getCenterX() {
+        return center.x;
     }
 
     public void rotate(float offset) {
