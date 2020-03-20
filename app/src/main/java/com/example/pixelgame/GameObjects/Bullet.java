@@ -29,6 +29,10 @@ public class Bullet extends GameObject implements Byteable {
         return Rules.BULLET_DAMAGE;
     }
 
+    public boolean willNotAppearOnEnemyScreen() {
+        return shape.isOutOfScreenHorizontal();
+    }
+
     public static Bullet fromBytes(byte[] speedBytes, byte[] shapeBytes) {
         if (speedBytes.length != SPEED_BYTE_LENGTH || shapeBytes.length < Shape.MIN_BYTE_SIZE) {
             throw new IllegalArgumentException();

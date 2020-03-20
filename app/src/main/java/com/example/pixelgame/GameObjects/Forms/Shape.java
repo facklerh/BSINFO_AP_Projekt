@@ -8,6 +8,10 @@ import com.example.pixelgame.GameObjects.Byteable;
 
 import static com.example.pixelgame.MsgUtil.concatBytes;
 import static com.example.pixelgame.MsgUtil.floatToBytes;
+import static com.example.pixelgame.Rules.BORDER_BOTTOM;
+import static com.example.pixelgame.Rules.BORDER_LEFT;
+import static com.example.pixelgame.Rules.BORDER_RIGHT;
+import static com.example.pixelgame.Rules.BORDER_TOP;
 import static com.example.pixelgame.Rules.SCREEN_WIDTH;
 
 public abstract class Shape implements Byteable {
@@ -69,6 +73,18 @@ public abstract class Shape implements Byteable {
     abstract public int rightest();
 
     abstract public int leftest();
+
+    public boolean isVisible() {
+        return !(isOutOfScreenHorizontal() || isOutOfScreenVertical());
+    }
+
+    public boolean isOutOfScreenHorizontal() {
+        return rightest() < BORDER_LEFT || leftest() > BORDER_RIGHT;
+    }
+
+    public boolean isOutOfScreenVertical() {
+        return lowest() < BORDER_TOP || highest() > BORDER_BOTTOM;
+    }
 
     public static Shape fromBytes(byte[] bytes) {
         ShapeType type = ShapeType.fromByte(bytes[0]);

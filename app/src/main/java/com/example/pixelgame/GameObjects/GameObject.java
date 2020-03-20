@@ -24,6 +24,10 @@ public abstract class GameObject {
         this.color = color;
     }
 
+    public boolean isVisible() {
+        return shape.isVisible();
+    }
+
     public boolean detectCollision(GameObject other) {
         return detectCollision(other.shape);
     }
