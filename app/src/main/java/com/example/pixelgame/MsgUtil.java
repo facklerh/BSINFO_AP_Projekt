@@ -13,31 +13,42 @@ public final class MsgUtil {
         byte READY_FOR_GAME = 2;
         byte IN_GAME = 3;
         byte PAUSE = 4;
-        byte ERROR = 5;
-        byte PLACEHOLDER = 6;
+        byte PLACEHOLDER = 5;
+        byte PLACEHOLDER0 = 6;
         byte PLACEHOLDER1 = 7;
         byte PLACEHOLDER2 = 8;
         byte PLACEHOLDER3 = 9;
         byte PLACEHOLDER4 = 10;
 
+        // Error opcodes
+        byte ERROR = 16;
+
         // Request opcodes
 
         byte REQ_VERSION = 32;
         byte REQ_NAME = 33;
-        byte REQ_PH = 33;
-        byte REQ_PH1 = 33;
-        byte REQ_PH2 = 33;
-        byte REQ_PH3 = 33;
-        byte REQ_PH4 = 33;
+        byte REQ_PH = 34;
+        byte REQ_PH1 = 35;
+        byte REQ_PH2 = 36;
+        byte REQ_PH3 = 37;
+        byte REQ_PH4 = 38;
 
         // Data opcode
-        byte NAME_START = 64;
-        byte NAME_END = 65;
+        byte NAME = 127;
         byte BULLET = 66;
-        byte PLACEHOLDER5 = 7;
-        byte PLACEHOLDER6 = 8;
-        byte PLACEHOLDER7 = 9;
-        byte PLACEHOLDER8 = 10;
+        byte PLACEHOLDER5 = 67;
+        byte PLACEHOLDER6 = 68;
+        byte PLACEHOLDER7 = 69;
+        byte PLACEHOLDER8 = 70;
+
+
+    }
+
+    public static byte[] addOpcode(byte op, byte[] bytes) {
+        final byte[] result = new byte[bytes.length + 1];
+        result[0] = op;
+        System.arraycopy(bytes, 0, result, 1, bytes.length);
+        return result;
     }
 
     public static byte[] concatBytes(byte[]... byteArrays) {
