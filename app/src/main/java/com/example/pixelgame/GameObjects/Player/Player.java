@@ -1,6 +1,7 @@
 package com.example.pixelgame.GameObjects.Player;
 
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.example.pixelgame.GameObjects.Bullet;
 import com.example.pixelgame.GameObjects.Forms.Shape;
@@ -32,10 +33,17 @@ public abstract class Player extends GameObject {
         return health <= 0;
     }
 
-    public float inflictDamage(int damage) {
-        health -= Math.min(damage, health);
-        updateColor();
-        return health;
+    public void inflictDamage(int damage) {
+        if (damage > 0) {
+            health -= Math.min(damage, health);
+            updateColor();
+        } else {
+            Log.e("ILLEGAL_ARGUMENT", "inflictDamage: tried to inflict invalid damage: " + damage);
+        }
+    }
+
+    private void updateColor() {
+        color.setAlpha(255 * health / maxHealth);
     }
 
     abstract public Bullet shoot(byte strength);
@@ -60,9 +68,5 @@ public abstract class Player extends GameObject {
     public void updateSpeed(byte xSpeed, byte ySpeed) {
         this.xSpeed = xSpeed < -MAX_SPEED ? -MAX_SPEED : (xSpeed > MAX_SPEED ? MAX_SPEED : xSpeed);
         this.ySpeed = ySpeed < -MAX_SPEED ? -MAX_SPEED : (ySpeed > MAX_SPEED ? MAX_SPEED : ySpeed);
-    }
-
-    public void updateColor() {
-        color.setAlpha(255 * health / maxHealth);
     }
 }
