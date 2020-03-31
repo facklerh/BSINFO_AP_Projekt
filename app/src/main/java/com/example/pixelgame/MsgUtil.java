@@ -7,39 +7,47 @@ public final class MsgUtil {
     }
 
     public interface Opcodes {
+        interface General {
+
+        }
+
+        interface ShootingGame {
+
+        }
+
         // State opcodes
-        byte CONNECTED = 0;
-        byte DISCONNECTED = 1;
-        byte READY_FOR_GAME = 2;
-        byte IN_GAME = 3;
-        byte PAUSE = 4;
-        byte PLACEHOLDER = 5;
-        byte PLACEHOLDER0 = 6;
-        byte PLACEHOLDER1 = 7;
-        byte PLACEHOLDER2 = 8;
-        byte PLACEHOLDER3 = 9;
-        byte PLACEHOLDER4 = 10;
+        int CONNECTED = 0;
+        int DISCONNECTED = 1;
+        int READY_FOR_GAME = 2;
+        int IN_GAME = 3;
+        int PAUSE = 4;
+        int RESUME = 5;
+        int PLACEHOLDER0 = 6;
+        int PLACEHOLDER1 = 7;
+        int PLACEHOLDER2 = 8;
+        int PLACEHOLDER3 = 9;
+        int PLACEHOLDER4 = 10;
 
         // Error opcodes
-        byte ERROR = 16;
+        int ERROR = 16;
 
         // Request opcodes
 
-        byte REQ_VERSION = 32;
-        byte REQ_NAME = 33;
-        byte REQ_PH = 34;
-        byte REQ_PH1 = 35;
-        byte REQ_PH2 = 36;
-        byte REQ_PH3 = 37;
-        byte REQ_PH4 = 38;
+        int REQ_VERSION = 32;
+        int REQ_NAME = 33;
+        int REQ_PH = 34;
+        int REQ_PH1 = 35;
+        int REQ_PH2 = 36;
+        int REQ_PH3 = 37;
+        int REQ_PH4 = 38;
 
         // Data opcode
-        byte NAME = 127;
-        byte BULLET = 66;
-        byte PLACEHOLDER5 = 67;
-        byte PLACEHOLDER6 = 68;
-        byte PLACEHOLDER7 = 69;
-        byte PLACEHOLDER8 = 70;
+        int NAME = 65;
+        int BULLET = 66;
+        int PLACEHOLDER5 = 67;
+        int PLACEHOLDER6 = 68;
+        int PLACEHOLDER7 = 69;
+        int PLACEHOLDER8 = 70;
 
 
     }
