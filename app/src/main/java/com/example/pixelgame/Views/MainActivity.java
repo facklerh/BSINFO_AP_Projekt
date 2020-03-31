@@ -2,6 +2,7 @@ package com.example.pixelgame.Views;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
 
@@ -39,6 +40,7 @@ public class MainActivity extends BaseView {
 
     private void initData() {
         final EditText input = new EditText(this);
+        input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(31)});
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
@@ -54,6 +56,8 @@ public class MainActivity extends BaseView {
                 String playerName = input.getText().toString();
                 if (playerName.isEmpty()) {
                     showMessage(R.string.errM_nameEmpty);
+                } else if (playerName.getBytes().length > Byte.MAX_VALUE) {
+                    showMessage(R.string.errM_nameTooLong);
                 } else {
                     AppData.init(playerName);
                     dialog.dismiss();

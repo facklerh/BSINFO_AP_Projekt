@@ -15,6 +15,7 @@
     <string name="errM_noSensorSupport">"It seems like device does not support a rotation Sensor :'-(\nPlease try again with a newer device."</string>
     <string name="errM_BTTurnedOff">"Bluetooth is turned of."</string>
     <string name="errM_nameEmpty">"Name field empty. Please enter name!"</string>
+    <string name="errM_nameTooLong">Name is too long. Please enter shorter name!</string>
     <string name="errM_illegalDevice">Another device tried to connect!\n\n%1$s\n%2$s</string>
     <string name="errM_notFoundInTime">Device not found in time.\\nPlease try again.</string>
     <string name="errM_missingSocket">Did not receive bluetooth socket.</string>
