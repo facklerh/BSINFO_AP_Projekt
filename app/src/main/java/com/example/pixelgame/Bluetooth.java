@@ -92,6 +92,13 @@ public final class Bluetooth {
         return null;
     }
 
+    public static String getConnectedID() {
+        if (connection != null) {
+            return connection.getRemoteDevice().getAddress();
+        }
+        return null;
+    }
+
     public static InputStream getInputStream() throws IOException {
         if (connection != null) {
             return connection.getInputStream();
