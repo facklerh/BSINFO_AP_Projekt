@@ -44,6 +44,9 @@ public class GameStatistic {
     }
 
     public GameStatistic(String deviceID, String name, int played, int won, int topWinningStreak, int topLosingStreak, int curStreak, boolean curStreakIsWinningStreak) {
+        if (deviceID == null || deviceID.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.deviceID = deviceID;
         this.name = name;
         this.played = played;
