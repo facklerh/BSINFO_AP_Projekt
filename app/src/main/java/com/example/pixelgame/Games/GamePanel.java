@@ -1,16 +1,22 @@
 package com.example.pixelgame.Games;
 
 import android.content.Context;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public abstract class GamePanel extends SurfaceView {
-    protected GameThread thread;
+public abstract class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+    protected final GameThread thread;
 
-    public GamePanel(Context context) {
+    public GamePanel(Context context, GameThread thread) {
         super(context);
+        this.thread = thread;
     }
 
-    public abstract void pause();
+    public void pause() {
+        thread.onPause();
+    }
 
-    public abstract void resume();
+    public void resume() {
+        thread.onResume();
+    }
 }
