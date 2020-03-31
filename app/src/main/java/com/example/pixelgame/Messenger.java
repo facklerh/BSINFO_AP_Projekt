@@ -19,6 +19,7 @@ import static com.example.pixelgame.MsgUtil.Opcodes.PAUSE;
 import static com.example.pixelgame.MsgUtil.Opcodes.READY_FOR_GAME;
 import static com.example.pixelgame.MsgUtil.Opcodes.REQ_NAME;
 import static com.example.pixelgame.MsgUtil.Opcodes.REQ_VERSION;
+import static com.example.pixelgame.MsgUtil.Opcodes.RESUME;
 
 public class Messenger {
     private static final String TAG = "WRITING_ERROR";
@@ -30,84 +31,50 @@ public class Messenger {
         this.out = out;
     }
 
-    public void sendConnected() {
+    private void sendStatus(int status) {
         try {
             out.write(CONNECTED);
             out.flush();
         } catch (IOException e) {
-            Log.e(TAG, "sendConnected");
+            Log.e(TAG, "sendStatus: " + status);
             e.printStackTrace();
         }
     }
 
-    public void sendReady() {
-        try {
-            out.write(READY_FOR_GAME);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "sendReady");
-            e.printStackTrace();
-        }
-    }
-
-    public void sendInGame() {
-        try {
-            out.write(IN_GAME);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "sendInGame");
-            e.printStackTrace();
-        }
+    public void sendConnected() {
+        sendStatus(CONNECTED);
     }
 
     public void sendDisconnected() {
-        try {
-            out.write(DISCONNECTED);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "sendDisconnected");
-            e.printStackTrace();
-        }
+        sendStatus(DISCONNECTED);
+    }
+
+    public void sendReady() {
+        sendStatus(READY_FOR_GAME);
+    }
+
+    public void sendInGame() {
+        sendStatus(IN_GAME);
     }
 
     public void sendPause() {
-        try {
-            out.write(PAUSE);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "sendPause");
-            e.printStackTrace();
-        }
+        sendStatus(PAUSE);
+    }
+
+    public void sendResume() {
+        sendStatus(RESUME);
     }
 
     public void sendError() {
-        try {
-            out.write(ERROR);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "sendError");
-            e.printStackTrace();
-        }
+        sendStatus(ERROR);
     }
 
     public void requestName() {
-        try {
-            out.write(REQ_NAME);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "requestName");
-            e.printStackTrace();
-        }
+        sendStatus(REQ_NAME);
     }
 
     public void requestVersion() {
-        try {
-            out.write(REQ_VERSION);
-            out.flush();
-        } catch (IOException e) {
-            Log.e(TAG, "requestVersion");
-            e.printStackTrace();
-        }
+        sendStatus(REQ_VERSION);
     }
 
     public void sendName() {
