@@ -5,26 +5,18 @@ import android.graphics.Canvas;
 import com.example.pixelgame.GameObjects.Bullet;
 import com.example.pixelgame.GameObjects.Player.Player;
 import com.example.pixelgame.Games.GameThread;
+import com.example.pixelgame.Messenger;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShootingGameThread extends GameThread {
-
-    boolean won = false;
-    boolean lost = false;
-
     Player player;
     List<Bullet> ownShots;
     List<Bullet> enemyShots;
 
-    Canvas canvas;
-
-    OutputStream output;
-
-    public ShootingGameThread(OutputStream output, Player player) {
-        this.output = output;
+    public ShootingGameThread(Canvas canvas, Messenger messenger, Player player) {
+        super(canvas, messenger);
         this.player = player;
 
         ownShots = new ArrayList<>(10);
@@ -32,31 +24,40 @@ public class ShootingGameThread extends GameThread {
     }
 
     @Override
-    public void run() {
-        while (!won || !lost) {
-            final long tickStart = System.currentTimeMillis();
-            update();
-            render();
-            final long tick = System.currentTimeMillis() - tickStart;
-            addDelay(tick);
-        }
+    protected void update() {
+        player.update();
+        updateEnemyShots();
+        updateOwnShots();
     }
 
-    private void update() {
-        player.update();
-        for (Bullet shot : enemyShots) {
+    private void updateEnemyShots() {
+        for (int i = enemyShots.size() - 1; i >= 0; i--) {
+            final Bullet shot = enemyShots.get(i);
             shot.update();
             if (player.detectCollision(shot)) {
-                player.inflictDamage(shot.getDamage());
+                player.inflictDamage(shot.strength);
+                enemyShots.remove(i);
+                if (player.isDead()) {
+                    lost = true;
+                }
             }
-        }
-        for (Bullet ownShot : ownShots) {
-            ownShot.update();
-            // TODO: Check if shot left screen in enemy screen dir
         }
     }
 
-    private void render() {
+    private void updateOwnShots() {
+        for (int i = ownShots.size() - 1; i >= 0; i--) {
+            final Bullet shot = ownShots.get(i);
+            shot.update();
+            if (!shot.isVisible()) {
+                if (shot.willAppearOnEnemyScreen())
+                    messenger.sendBullet(shot);
+                ownShots.remove(i);
+            }
+        }
+    }
+
+    @Override
+    protected void render(Canvas canvas) {
         player.draw(canvas);
         for (Bullet shot : ownShots) {
             shot.draw(canvas);
@@ -67,12 +68,12 @@ public class ShootingGameThread extends GameThread {
     }
 
     @Override
-    public void onPause() {
+    protected void onVictory() {
 
     }
 
     @Override
-    public void onResume() {
+    protected void onDefeat() {
 
     }
 }
