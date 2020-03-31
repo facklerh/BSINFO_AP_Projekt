@@ -16,8 +16,6 @@ public final class GyroSensor {
     private GyroSensor() {
     }
 
-    ;
-
     public static boolean initGyroSensor(Context context) {
         sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
         if (sensorManager == null)
