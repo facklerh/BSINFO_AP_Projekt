@@ -26,8 +26,8 @@ public class Bullet extends GameObject implements Byteable {
         this.strength = strength;
     }
 
-    public boolean willNotAppearOnEnemyScreen() {
-        return shape.isOutOfScreenHorizontal();
+    public boolean willAppearOnEnemyScreen() {
+        return !shape.isOutOfScreenHorizontal();
     }
 
     public static Bullet fromBytes(byte[] bulletBytes) {
