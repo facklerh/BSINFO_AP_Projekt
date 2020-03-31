@@ -2,12 +2,12 @@ package com.example.pixelgame.GameObjects;
 
 import com.example.pixelgame.GameObjects.Forms.Shape;
 import com.example.pixelgame.GameObjects.Forms.Square;
-import com.example.pixelgame.Rules;
 
 import static com.example.pixelgame.MsgUtil.concatBytes;
+import static com.example.pixelgame.MsgUtil.getByteSection;
 
 public class Bullet extends GameObject implements Byteable {
-    public static final int REMAINING_BYTE_LENGTH = 3; // this does not include shape
+    public static final int REMAINING_BYTE_LENGTH = 3; // x and y Speed + strength | this does not include shape
     private static final int STANDARD_SIZE = 20;
 
     public final byte strength;
@@ -26,12 +26,14 @@ public class Bullet extends GameObject implements Byteable {
         this.strength = strength;
     }
 
-    public int getDamage() {
-        return Rules.BULLET_DAMAGE;
-    }
-
     public boolean willNotAppearOnEnemyScreen() {
         return shape.isOutOfScreenHorizontal();
+    }
+
+    public static Bullet fromBytes(byte[] bulletBytes) {
+        byte[] remainingBytes = getByteSection(bulletBytes, 0, REMAINING_BYTE_LENGTH);
+        byte[] shapeBytes = getByteSection(bulletBytes, REMAINING_BYTE_LENGTH);
+        return fromBytes(remainingBytes, shapeBytes);
     }
 
     public static Bullet fromBytes(byte[] remainingBytes, byte[] shapeBytes) {
